@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "instrument-registry"
+version = "0.1.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+jsonschema = "^4.22.0"
+pyyaml = "^6.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

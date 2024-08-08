@@ -1,0 +1,52 @@
+{
+    "type": "dir",
+    "size": 0,
+    "name": "instruments",
+    "path": "instruments",
+    "download_url": "https://minbzk.github.io/instrument-registry/index.json",
+    "_links": {
+        "self": "https://minbzk.github.io/instrument-registry/index.json"
+    },
+    "entries": [
+        {
+            "type": "file",
+            "size": 60271,
+            "name": "aiia.yaml",
+            "path": "instruments/aiia.yaml",
+            "download_url": "https://minbzk.github.io/instrument-registry/instruments/aiia.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/instrument-registry/instruments/aiia.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 32897,
+            "name": "iama.yaml",
+            "path": "instruments/iama.yaml",
+            "download_url": "https://minbzk.github.io/instrument-registry/instruments/iama.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/instrument-registry/instruments/iama.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 5187,
+            "name": "conformity_assessment_eu_ai_act.yaml",
+            "path": "instruments/conformity_assessment_eu_ai_act.yaml",
+            "download_url": "https://minbzk.github.io/instrument-registry/instruments/conformity_assessment_eu_ai_act.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/instrument-registry/instruments/conformity_assessment_eu_ai_act.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 14009,
+            "name": "technical_docs_for_high_risk_ai.yaml",
+            "path": "instruments/technical_docs_for_high_risk_ai.yaml",
+            "download_url": "https://minbzk.github.io/instrument-registry/instruments/technical_docs_for_high_risk_ai.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/instrument-registry/instruments/technical_docs_for_high_risk_ai.yaml"
+            }
+        }
+    ]
+}
