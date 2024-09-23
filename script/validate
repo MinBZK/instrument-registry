@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+from collections import Counter
+from collections.abc import Iterable
+
+import jsonschema
+import yaml
+from jsonschema import validate
+
+
+def extract_urns(data: Iterable, urns: list | None = None, seen_urns: set | None = None) -> list:  # noqa: C901
+    if urns is None:
+        urns = []
+    if seen_urns is None:
+        seen_urns = set()
+
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key == "urn":
+                if value in seen_urns:
+                    urns.append(value)
+                else:
+                    seen_urns.add(value)
+            elif key != "links":  # Ignore 'links' key to avoid nested urns there
+                extract_urns(value, urns, seen_urns)
+    elif isinstance(data, list):
+        for item in data:
+            extract_urns(item, urns, seen_urns)
+
+    return urns
+
+
+# Load the JSON schema
+with open(sys.argv[1]) as schema_file:
+    schema = json.load(schema_file)
+
+urns = []
+for f in sys.argv[2:]:
+    # Load the YAML file
+    with open(f) as yaml_file:
+        data = yaml.safe_load(yaml_file)
+    urns.extend(extract_urns(data))
+
+    # Validate the data
+    try:
+        validate(instance=data, schema=schema)
+        print(f"Validation of '{f}' successful.")
+    except jsonschema.exceptions.ValidationError as err:
+        print(f"Validation error in '{f}': {err.message}")
+        sys.exit(1)
+
+duplicates = [u for (u, c) in Counter(urns).most_common() if c > 1]
+if duplicates:
+    print(f"URNs are not unique: {duplicates}")
+    sys.exit(1)

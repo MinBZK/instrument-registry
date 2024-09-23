@@ -1,0 +1,56 @@
+{
+    "type": "dir",
+    "size": 0,
+    "name": "instruments",
+    "path": "instruments",
+    "download_url": "https://minbzk.github.io/task-registry/index.json",
+    "_links": {
+        "self": "https://minbzk.github.io/task-registry/index.json"
+    },
+    "entries": [
+        {
+            "type": "file",
+            "size": 60271,
+            "name": "aiia.yaml",
+            "path": "instruments/aiia.yaml",
+            "urn": "urn:nl:aivt:ir:aiia:1.0",
+            "download_url": "https://minbzk.github.io/task-registry/instruments/aiia.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/task-registry/instruments/aiia.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 5187,
+            "name": "conformity_assessment_eu_ai_act.yaml",
+            "path": "instruments/conformity_assessment_eu_ai_act.yaml",
+            "urn": "urn:nl:aivt:ir:ca:1.0",
+            "download_url": "https://minbzk.github.io/task-registry/instruments/conformity_assessment_eu_ai_act.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/task-registry/instruments/conformity_assessment_eu_ai_act.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 32897,
+            "name": "iama.yaml",
+            "path": "instruments/iama.yaml",
+            "urn": "urn:nl:aivt:ir:iama:1.0",
+            "download_url": "https://minbzk.github.io/task-registry/instruments/iama.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/task-registry/instruments/iama.yaml"
+            }
+        },
+        {
+            "type": "file",
+            "size": 14009,
+            "name": "technical_docs_for_high_risk_ai.yaml",
+            "path": "instruments/technical_docs_for_high_risk_ai.yaml",
+            "urn": "urn:nl:aivt:ir:td:1.0",
+            "download_url": "https://minbzk.github.io/task-registry/instruments/technical_docs_for_high_risk_ai.yaml",
+            "_links": {
+                "self": "https://minbzk.github.io/task-registry/instruments/technical_docs_for_high_risk_ai.yaml"
+            }
+        }
+    ]
+}

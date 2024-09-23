@@ -1,0 +1,15 @@
+services:
+  tr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/minbzk/tr:latest
+    restart: unless-stopped
+    volumes:
+      - ./task_registry:/app/task_registry/:cached
+    environment:
+      - ENVIRONMENT=local
+    ports:
+      - 8070:8000
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health/live || exit 1"]

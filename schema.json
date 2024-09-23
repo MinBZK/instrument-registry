@@ -1,0 +1,291 @@
+{
+  "$id": "http://example.com/schemas/schema_v1.1.0.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "systemcard_path": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "const": "1.1.0"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "urn": {
+      "type": "string",
+      "pattern": "^urn:nl:aivt:ir:[a-z]+:[0-9]+\\.[0-9]+"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "organization",
+          "name",
+          "email",
+          "role"
+        ]
+      }
+    },
+    "date": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "urn": {
+            "description": "A unique identifier for the question",
+            "type": "string",
+            "pattern": "^urn:nl:aivt:ir:[a-z]+:[0-9]+\\.[0-9]+:[0-9A-Za-z\\.]+$"
+          },
+          "labels": {
+            "description": "Labels to specify the question",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "type": {
+            "description": "Question type",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open_question",
+                "closed_question",
+                "sign_task",
+                "upload_document",
+                "statement"
+              ]
+            }
+          },
+          "suggested_roles": {
+            "description": "Roles suggested to answer question",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Aanbestedingsjurist",
+                "Aanbieder",
+                "Archiefdeskundige",
+                "Behoeftesteller",
+                "Communicatieadviseur",
+                "Contractbeheerder",
+                "Data engineer",
+                "Data scientist",
+                "Domeinspecialist",
+                "Ethicus",
+                "Gebruiker",
+                "Gemandateerd verantwoordelijke(n)",
+                "Informatie analist",
+                "Informatiebeheerder",
+                "Inkoopadviseur",
+                "Jurist",
+                "Opdrachtgever",
+                "Opdrachtnemer",
+                "Privacy-officer",
+                "Proceseigenaar",
+                "Projectleider",
+                "Security officer"
+              ]
+            }
+          },
+          "lifecycle": {
+            "description": "Part of the algorithm lifecycle to which this question refers",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Probleemanalyse",
+                "Ontwerp",
+                "Dataverkenning en datapreparatie",
+                "Ontwikkelen",
+                "Verificatie en validatie",
+                "Implementatie",
+                "Monitoring en beheer",
+                "Uitfaseren"
+              ]
+            }
+          },
+          "links": {
+            "description": "Links to other relevant measures / tasks",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "urn": {
+                  "type": "string"
+                },
+                "systemcard_path": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required_status": {
+            "description": "Whether the task is required (Yes) or optional (No)",
+            "type": "boolean"
+          },
+          "depends_on": {
+            "description": "Specific tasks that are required to be completed before this current task",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "urn": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "signature": {
+            "description": "To store the user's hash and the algorithm used to hash it",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "algorithm": {
+                  "type": "string"
+                },
+                "signature_hash": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "expiration_date": {
+            "description": "To store the date until when completing this task will be valid",
+            "type": "string",
+            "format": "date-time"
+          },
+          "template": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^\\$.*$"
+            },
+            "properties": {
+              "authors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "const": "$AUTHOR.NAME"
+                    },
+                    "email": {
+                      "type": "string",
+                      "const": "$AUTHOR.EMAIL"
+                    },
+                    "role": {
+                      "type": "string",
+                      "const": "$AUTHOR.ROLE"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "email",
+                    "role"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "urn",
+          "labels",
+          "type",
+          "suggested_roles",
+          "lifecycle",
+          "links",
+          "template"
+        ]
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "contains": {
+              "const": "sign_task"
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "signature",
+          "expiration_date"
+        ]
+      }
+    }
+  },
+  "required": [
+    "systemcard_path",
+    "schema_version",
+    "name",
+    "description",
+    "urn",
+    "language",
+    "owners",
+    "date",
+    "url",
+    "tasks"
+  ]
+}
