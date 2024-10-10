@@ -2,7 +2,7 @@ systemcard_path: .systemcard.measures[]
 schema_version: 1.1.0
 name: "Bespreek de vereiste met aanbieder of opdrachtnemer."
 description: "Ga met een aanbieder en/of met opdrachtnemers in gesprek over in hoeverre deze invulling heeft gegeven of gaat geven aan de vereiste. Op basis van nieuwe of gewijzigde wet- en regelgeving is het denkbaar dat een aanbieder van algoritmes of AI-systemen nog niet of niet meer voldoet aan deze vereiste. Indien van toepassing, laat de aanbieder inzichtelijk maken welke stappen deze gaat zetten om hieraan te gaan voldoen. Dit is ook relevant bij reeds afgesloten contracten."
-urn: "urn:nl:ak:maa:0.1" #don't have an URN yet in AK
+urn: "urn:nl:ak:mtr:pin:01" #don't have an URN yet in AK
 language: "nl"
 owners:
   - organization: ""
