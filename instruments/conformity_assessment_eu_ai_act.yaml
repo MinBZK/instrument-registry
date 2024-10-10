@@ -2,7 +2,7 @@ systemcard_path: .assessments[]
 schema_version: 1.1.0
 name: "EU-conformiteitsverklaring voor hoog-risico AI-systemen"
 description: "EU-conformiteitsverklaring van een AI-systeem met een hoog risico wordt ondertekend door de ontwikkelaar voordat dit systeem in de handel wordt gebracht of in gebruik wordt gesteld."
-urn: "urn:nl:aivt:ir:ca:1.0"
+urn: "urn:nl:aivt:tr:ca:1.0"
 language: "nl"
 owners:
   - organization: "European Union"
@@ -26,7 +26,7 @@ template: &assessmentcard_template
 # Conformity Assessment
 tasks:
   - question: "De naam en het type van het AI-systeem, evenals eventuele aanvullende ondubbelzinnige verwijzingen waarmee het AI-systeem kan worden geïdentificeerd en getraceerd."
-    urn: "urn:nl:aivt:ir:ca:1.0:1.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:1.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -36,17 +36,17 @@ tasks:
     links: [ {"systemcard_path": ".name", "version": ">0.1a1"}, {"systemcard_path": ".description", "version": ">0.1a1"}]
     template: *assessmentcard_template
   - question: "De naam en het adres van de aanbieder en, indien van toepassing, zijn gemachtigde."
-    urn: "urn:nl:aivt:ir:ca:1.0:2.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:2.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
     type: ["open_question"]
     suggested_roles: [ "Projectleider", "Aanbieder"]
     lifecycle: [ ]
-    links: [ {"systemcard_path": ".owners", "version": ">0.1a1"}, {"urn": "urn:nl:aivt:ir:td:1.0:1.a.2"}]
+    links: [ {"systemcard_path": ".owners", "version": ">0.1a1"}, {"urn": "urn:nl:aivt:tr:td:1.0:1.a.2"}]
     template: *assessmentcard_template
   - question: "De in artikel 47 bedoelde EU-conformiteitsverklaring wordt verstrekt onder de uitsluitende verantwoordelijkheid van de aanbieder."
-    urn: "urn:nl:aivt:ir:ca:1.0:3.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:3.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -56,7 +56,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Het AI-systeem is in overeenstemming met deze verordening en, in voorkomend geval, met eventuele andere desbetreffende Uniewetgeving die voorziet in de afgifte van de in artikel 47 bedoelde EU-conformiteitsverklaring."
-    urn: "urn:nl:aivt:ir:ca:1.0:4.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:4.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -66,7 +66,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Indien een AI-systeem de verwerking van persoonsgegevens met zich meebrengt, voldoet dat AI-systeem aan de Verordeningen (EU) 2016/679 en (EU) 2018/1725 en Richtlijn (EU) 2016/680."
-    urn: "urn:nl:aivt:ir:ca:1.0:5.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:5.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -76,17 +76,17 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Referenties van relevante gebruikte geharmoniseerde normen of andere gemeenschappelijke specificaties waarop de conformiteitsverklaring betrekking heeft."
-    urn: "urn:nl:aivt:ir:ca:1.0:6.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:6.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
     type: ["open_question", "upload_document"]
     suggested_roles: [ "Projectleider", "Aanbieder"]
     lifecycle: [ "Verificatie en validatie" ]
-    links: [{"urn": "urn:nl:aivt:ir:td:1.0:7"} ]
+    links: [{"urn": "urn:nl:aivt:tr:td:1.0:7"} ]
     template: *assessmentcard_template
   - question: "De naam en het identificatienummer van de aangemelde instantie, een beschrijving van de uitgevoerde conformiteitsbeoordelingsprocedure en identificatie van het afgegeven certificaat."
-    urn: "urn:nl:aivt:ir:ca:1.0:7.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:7.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -96,7 +96,7 @@ tasks:
     links: [ {"systemcard_path": ".owners/oin", "version": ">0.1a1"}, {"systemcard_path": ".owners/organization", "version": ">0.1a1"},]
     template: *assessmentcard_template
   - question: "De plaats en de datum van afgifte van de verklaring, de naam en de functie van de persoon die de verklaring heeft ondertekend alsmede een vermelding van de persoon voor en namens wie die persoon ondertekent, een handtekening."
-    urn: "urn:nl:aivt:ir:ca:1.0:8.0"
+    urn: "urn:nl:aivt:tr:ca:1.0:8.0"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"

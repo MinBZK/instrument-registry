@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.requirements[]               # append requirements.yaml to 'assessments' list in system card
+schema_version: 1.1.0
+name: "Automatische logregistratie voor hoog-risico AI"
+description: "Algoritmes en AI-systemen zijn dusdanig technisch vormgegeven dat gebeurtenissen gedurende hun levenscyclus automatisch worden geregistreerd (“logs”)."
+urn: "urn:nl:ak:ver:aia-7"
+language: "nl"
+owners:
+  - organization: "Algoritmekader"
+    name: ""
+    email: ""
+    role: ""
+date: ""
+url: "https://minbzk.github.io/Algoritmekader/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html"
+suggested_roles: [ "Aanbieder", "Gebruiksverantwoordelijke" ]
+lifecycle: [ "Ontwikkelen", "Monitoring en beheer" ]
+links: [{"urn:urn:nl:ak:maa:0.1"}]
+ai_risk_profile: ["AI-systeem", "Hoog-risico AI"]
+always_applicable: 0
+
+template: &systemcard_requirements_template
+  requirement: "$REQUIREMENT"
+  remarks: "$REMARKS"
+  status: "$STATUS"
+  timestamp: "$TIMESTAMP"
+  authors:
+    - name: "$AUTHOR.NAME"
+      email: "$AUTHOR.EMAIL"
+      role: "$AUTHOR.ROLE"

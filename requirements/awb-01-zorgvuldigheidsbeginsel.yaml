@@ -1,0 +1,28 @@
+systemcard_path: .systemcard.requirements[]
+schema_version: 1.1.0
+name: "Relevante feiten en belangen zijn bekend"
+description: "De ontwikkeling en het gebruik van algoritmes en AI-systemen komt zorgvuldig tot stand."
+urn: "urn:nl:ak:ver:awb-01"
+language: "nl"
+owners:
+  - organization: "Algoritmekader"
+    name: ""
+    email: ""
+    role: ""
+date: ""
+url: "https://minbzk.github.io/Algoritmekader/vereisten/awb-01-zorgvuldigheidsbeginsel/index.html"
+suggested_roles: [ "Aanbieder", "Gebruiksverantwoordelijke" ]
+lifecycle: [ "Organisatieverantwoordelijkheden" ]
+links: []
+ai_risk_profile: []
+always_applicable: 1
+
+template: &systemcard_requirements_template
+  requirement: "$REQUIREMENT"
+  remarks: "$REMARKS"
+  status: "$STATUS"
+  timestamp: "$TIMESTAMP"
+  authors:
+    - name: "$AUTHOR.NAME"
+      email: "$AUTHOR.EMAIL"
+      role: "$AUTHOR.ROLE"

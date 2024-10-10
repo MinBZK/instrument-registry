@@ -2,7 +2,7 @@ systemcard_path: .assessments[]
 schema_version: 1.1.0
 name: "Technische documentatie voor hoog-risico AI-systemen"
 description: "De technische documentatie van een AI-systeem met een hoog risico wordt opgesteld voordat dit systeem in de handel wordt gebracht of in gebruik wordt gesteld."
-urn: "urn:nl:aivt:ir:td:1.0"
+urn: "urn:nl:aivt:tr:td:1.0"
 language: "nl"
 owners:
   - organization: "European Union"
@@ -26,17 +26,17 @@ template: &assessmentcard_template                  # anchor for all fields belo
 # Algemene beschrijving AI-systeem
 tasks:
   - question: "Wat is het beoogde doel van het AI-systeem?"
-    urn: "urn:nl:aivt:ir:td:1.0:1.a.1"
+    urn: "urn:nl:aivt:tr:td:1.0:1.a.1"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
     type: [ "open_question" ]
     suggested_roles: [ ]
     lifecycle: [ ]
-    links: [ { "text": "DPIA vraag 4" }, { "urn": "urn:nl:aivt:ir:1.0:1.2.1" }, { "systemcard_path": ".goal_and_impact", "version": ">0.1a1" } ]
+    links: [ { "text": "DPIA vraag 4" }, { "urn": "urn:nl:aivt:tr:1.0:1.2.1" }, { "systemcard_path": ".goal_and_impact", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Wat is de naam van de aanbieder van het AI-systeem?"
-    urn: "urn:nl:aivt:ir:td:1.0:1.a.2"
+    urn: "urn:nl:aivt:tr:td:1.0:1.a.2"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -46,7 +46,7 @@ tasks:
     links: [ { "systemcard_path": ".organization", "version": ">0.1a1" }, { "systemcard_path": ".external_providers", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de versie van het AI-systeem. Maak hierbij het verband met eerdere versies duidelijk."
-    urn: "urn:nl:aivt:ir:td:1.0:1.a.3"
+    urn: "urn:nl:aivt:tr:td:1.0:1.a.3"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -56,7 +56,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Hoe interageert het AI-systeem met hardware of software, inclusief andere AI-systemen, of kan het AI-systeem worden gebruikt om te interageren met hardware of software?"
-    urn: "urn:nl:aivt:ir:td:1.0:1.b"
+    urn: "urn:nl:aivt:tr:td:1.0:1.b"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -66,7 +66,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de versies van de betreffende software of firmware en eventuele eisen met betrekking tot versie-updates."
-    urn: "urn:nl:aivt:ir:td:1.0:1.c"
+    urn: "urn:nl:aivt:tr:td:1.0:1.c"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -76,7 +76,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de vormen waarin het AI-systeem in de handel wordt gebracht of in gebruik wordt gesteld, zoals in hardware ingebedde softwarepaketten, downloads of API's."
-    urn: "urn:nl:aivt:ir:td:1.0:1.d"
+    urn: "urn:nl:aivt:tr:td:1.0:1.d"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -86,7 +86,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Geef een beschrijving van de hardware waarop het AI-systeem moet worden uitgevoerd."
-    urn: "urn:nl:aivt:ir:td:1.0:1.e"
+    urn: "urn:nl:aivt:tr:td:1.0:1.e"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -96,7 +96,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Indien het AI systeem een component vormt van producten, foto's of illustraties: beschrijf de externe kenmerken, markeringen en interne lay-out van die producten."
-    urn: "urn:nl:aivt:ir:td:1.0:1.f"
+    urn: "urn:nl:aivt:tr:td:1.0:1.f"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -106,7 +106,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de gebruiksinstructies en geef een basisbeschrijving van de gebruikersinterface die aan de gebruiksverantwoordelijke wordt verstrekt."
-    urn: "urn:nl:aivt:ir:td:1.0:1.h"
+    urn: "urn:nl:aivt:tr:td:1.0:1.h"
     labels:
       - key: topic
         value: "Algemene beschrijving AI-systeem"
@@ -120,7 +120,7 @@ tasks:
 
   # Gedetailleerde beschrijving
   - question: "Beschrijf de uitgevoerde methoden en stappen voor de ontwikkeling van het AI-systeem (inclusief door derden geleverde vooraf getrainde systemen of hulpmiddelen)."
-    urn: "urn:nl:aivt:ir:td:1.0:2.a"
+    urn: "urn:nl:aivt:tr:td:1.0:2.a"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -130,7 +130,7 @@ tasks:
     links: [ { "systemcard_path": ".description", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de ontwerpspecificaties (inclusief algemene logica) en belangrijkste ontwerpkeuzen (inclusief aannames, motivering en gebruikers)."
-    urn: "urn:nl:aivt:ir:td:1.0:2.b.1"
+    urn: "urn:nl:aivt:tr:td:1.0:2.b.1"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -140,7 +140,7 @@ tasks:
     links: [ { "systemcard_path": ".description", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de belangrijkste classificatiekeuzen."
-    urn: "urn:nl:aivt:ir:td:1.0:2.b.2"
+    urn: "urn:nl:aivt:tr:td:1.0:2.b.2"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -150,7 +150,7 @@ tasks:
     links: [ { "systemcard_path": "./models//task_type", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf voor welke optimalisatie het systeem is ontworpen en beschrijf de relevantie van de verschillende parameters."
-    urn: "urn:nl:aivt:ir:td:1.0:2.b.3"
+    urn: "urn:nl:aivt:tr:td:1.0:2.b.3"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -160,7 +160,7 @@ tasks:
     links: [ { "systemcard_path": "./models//metrics", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de verwachte output en outputkwaliteit."
-    urn: "urn:nl:aivt:ir:td:1.0:2.b.4"
+    urn: "urn:nl:aivt:tr:td:1.0:2.b.4"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -170,7 +170,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de systeemarchitectuur inclusief de relatie tussen softwarecomponenten."
-    urn: "urn:nl:aivt:ir:td:1.0:2.c.1"
+    urn: "urn:nl:aivt:tr:td:1.0:2.c.1"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -180,7 +180,7 @@ tasks:
     links: [ { "systemcard_path": ".external_providers", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de rekenhulpmiddelen die zijn gebruikt voor het ontwikkelen, trainen, testen en valideren van het AI-systeem."
-    urn: "urn:nl:aivt:ir:td:1.0:2.c.2"
+    urn: "urn:nl:aivt:tr:td:1.0:2.c.2"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -190,7 +190,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Indien relevant: Geef een beschrijving van de herkomst, reikwijdte, belangrijkste kenmerken, selectie, labelling en opschoning van de dataset(s)."
-    urn: "urn:nl:aivt:ir:td:1.0:2.d"
+    urn: "urn:nl:aivt:tr:td:1.0:2.d"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -200,7 +200,7 @@ tasks:
     links: [ { "systemcard_path": "./models//metrics", "version": ">0.1a1" }, { "systemcard_path": ".used_data", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beoordeel het menselijk toezicht op het AI-systeem, inclusief de technische maatregelen voor de vereenvoudiging van de interpretatie van de output (raadpleeg hiervoor de maatregelen uit artikel 14 van de AI Verordening)."
-    urn: "urn:nl:aivt:ir:td:1.0:2.e"
+    urn: "urn:nl:aivt:tr:td:1.0:2.e"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -210,7 +210,7 @@ tasks:
     links: [ { "systemcard_path": ".human_intervention", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Indien van toepassing: geef een beschrijving van de vooraf bepaalde wijzigingen in het AI-systeem en de prestaties ervan, en de ingevoerde technische oplossingen om aan de vereisten voor hoog-risico AI-systemen te voldoen (raadpleeg hiervoor hoofdstuk 3, sectie 2 van de AI Verordening)"
-    urn: "urn:nl:aivt:ir:td:1.0:2.f"
+    urn: "urn:nl:aivt:tr:td:1.0:2.f"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -220,7 +220,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de gebruikte validatie- en testprodedures, waaronder informatie over de gebruikte validatie- en testdata en de belangrijkste kenmerken ervan."
-    urn: "urn:nl:aivt:ir:td:1.0:2.g.1"
+    urn: "urn:nl:aivt:tr:td:1.0:2.g.1"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -230,7 +230,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de statistieken die worden gebruikt voor het meten van de nauwkeurigheid, robuustheid en mogelijk discriminirende gevolgen."
-    urn: "urn:nl:aivt:ir:td:1.0:2.g.2"
+    urn: "urn:nl:aivt:tr:td:1.0:2.g.2"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -240,7 +240,7 @@ tasks:
     links: [ { "systemcard_path": "./models//metrics", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de gehanteerde cyberbeveilighingsmaatregelen."
-    urn: "urn:nl:aivt:ir:td:1.0:2.h"
+    urn: "urn:nl:aivt:tr:td:1.0:2.h"
     labels:
       - key: topic
         value: "Gedetailleerde beschrijving van elementen van het AI-systeem en ontwikkeling"
@@ -250,7 +250,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Beschrijf de monitoring, werking en controle van het AI-systeem, met betrekking tot: nauwkeurigheid voor specifieke en/of groepen personen en tov het beoogde doel, voorzienbare onbedoelde resultaten en risicobronnen voor de gezondheid."
-    urn: "urn:nl:aivt:ir:td:1.0:3"
+    urn: "urn:nl:aivt:tr:td:1.0:3"
     labels:
       - key: topic
         value: "Toezicht en monitoring"
@@ -260,7 +260,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Geef een beschrijving van de geschiktheid van de prestatiestatistieken voor het specifieke AI-systeem."
-    urn: "urn:nl:aivt:ir:td:1.0:4"
+    urn: "urn:nl:aivt:tr:td:1.0:4"
     labels:
       - key: topic
         value: "Prestatiestatistieken"
@@ -270,7 +270,7 @@ tasks:
     links: [ { "systemcard_path": "./models//metrics", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf het systeem voor risicobeheer (raadpleeg hiervoor artikel 9 van de AI Veroderning)."
-    urn: "urn:nl:aivt:ir:td:1.0:5"
+    urn: "urn:nl:aivt:tr:td:1.0:5"
     labels:
       - key: topic
         value: "Risicobeheer"
@@ -280,7 +280,7 @@ tasks:
     links: [ { "systemcard_path": ".risk_management", "version": ">0.1a1" } ]
     template: *assessmentcard_template
   - question: "Beschrijf de relevante wijzigingen die door de aanbieder tijdens de levensduur van het systeem worden aangebracht."
-    urn: "urn:nl:aivt:ir:td:1.0:6"
+    urn: "urn:nl:aivt:tr:td:1.0:6"
     labels:
       - key: topic
         value: "Systeemaanpassingen"
@@ -290,7 +290,7 @@ tasks:
     links: [ ]
     template: *assessmentcard_template
   - question: "Geef een lijst van de geharmoniseerde normen die volledig of gedeeltelijk worden toegepast en waarvan de referenties zijn gepubliceerd in het Publicatieblad van de Europese Unie. Indien de geharmoniseerde normen niet zijn toegepast, geef dan een gedetailleerde beschrijving van de vastgestelde oplossingen om te voldoen aan de vereisten van hoog-risico AI-systemen, met inbegrip van een lijst van andere toegepaste relevante normen en technische specificaties."
-    urn: "urn:nl:aivt:ir:td:1.0:7"
+    urn: "urn:nl:aivt:tr:td:1.0:7"
     labels:
       - key: topic
         value: "Geharmoniseerde normen lijst"
@@ -301,7 +301,7 @@ tasks:
     template: *assessmentcard_template
 
   - question: "Een exemplaar van de in artikel 47 bedoelde EU-conformiteitsverklaring."
-    urn: "urn:nl:aivt:ir:td:1.0:8"
+    urn: "urn:nl:aivt:tr:td:1.0:8"
     labels:
       - key: topic
         value: "EU-conformiteitsverklaring"
@@ -312,7 +312,7 @@ tasks:
     template: *assessmentcard_template
 
   - question: "Beschrijf het plan voor evaluatie en monitoring nadat het AI systeem in gebruik is genomen (raadpleeg hiervoor artikel 72, lid 3 van de AI Verordening)."
-    urn: "urn:nl:aivt:ir:td:1.0:9"
+    urn: "urn:nl:aivt:tr:td:1.0:9"
     labels:
       - key: topic
         value: "Evaluatieplan"

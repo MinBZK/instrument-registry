@@ -19,7 +19,7 @@
     },
     "urn": {
       "type": "string",
-      "pattern": "^urn:nl:aivt:ir:[a-z]+:[0-9]+\\.[0-9]+"
+      "pattern": "^urn:nl:aivt:tr:[a-z]+:[0-9]+\\.[0-9]+"
     },
     "language": {
       "type": "string",
@@ -68,7 +68,7 @@
           "urn": {
             "description": "A unique identifier for the question",
             "type": "string",
-            "pattern": "^urn:nl:aivt:ir:[a-z]+:[0-9]+\\.[0-9]+:[0-9A-Za-z\\.]+$"
+            "pattern": "^urn:nl:aivt:tr:[a-z]+:[0-9]+\\.[0-9]+:[0-9A-Za-z\\.]+$"
           },
           "labels": {
             "description": "Labels to specify the question",
@@ -99,7 +99,9 @@
                 "closed_question",
                 "sign_task",
                 "upload_document",
-                "statement"
+                "statement",
+                "requirement",
+                "measure"
               ]
             }
           },
@@ -120,6 +122,7 @@
                 "Domeinspecialist",
                 "Ethicus",
                 "Gebruiker",
+                "Gebruiksverantwoordelijke",
                 "Gemandateerd verantwoordelijke(n)",
                 "Informatie analist",
                 "Informatiebeheerder",
