@@ -8,25 +8,29 @@ categories:
 description:
   en:
     features:
-      - Python Template
-    genericName: python_project
+      - DPIA, IAMA and pre-scan assessment schemas
+      - Assessment content registry
+    genericName: instrument_registry
     longDescription: |
-      This a an example python template project.
-    shortDescription: Python Template project
+      Registry of assessment schemas and assessment content (DPIA, IAMA,
+      pre-scan) used to determine which privacy and algorithm-impact
+      instruments apply, sourced from MinBZK/par-dpia-form.
+    shortDescription: Registry of privacy and algorithm-impact assessment instruments
 developmentStatus: concept
 legal:
   license: EUPL-1.2
 localisation:
   availableLanguages:
     - en
+    - nl
   localisationReady: false
 maintenance:
   contacts:
     - name: AI Validatie
   type: community
-name: python_project
+name: instrument_registry
 platforms:
   - web
-releaseDate: '2024-04-25'
+releaseDate: '2026-08-26'
 softwareType: standalone/web
-url: 'https://github.com/MinBZK/python-project-template'
+url: 'https://github.com/MinBZK/instrument-registry'

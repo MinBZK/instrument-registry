@@ -1,33 +1,28 @@
-# Python Project Template
+# Instrument Registry
 
 ## Description
 
-This is a template repository that can be used for Python 3.11 projects and uses the Poetry package manager. By default this project sets up the following:
+Registry of assessment schemas and assessment content (DPIA, IAMA, pre-scan)
+used to determine which privacy and algorithm-impact instruments apply.
 
-* Devcontainers for VSCode users
-* Github community health files
-* Github Dependabot
-* VSCode configs
-* Some scripts to adhere to programming standards
-* A editorconfig file so editors enforce formatting
-* A default .gitgignore
-* A default pre-commit-config
-* A EUPL v1.2 Licence
-* A basic Docker setup
-* publiccode.yml
+The schemas and assessment definitions in this repository are copied from
+[MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form) (see
+`schemas/` and `assessments/`), which is the source of truth for these
+instruments. This repository packages that content as a standalone registry,
+in the spirit of [MinBZK/task-registry](https://github.com/MinBZK/task-registry).
 
-## How to use this template repository
+## Structure
 
-When creating a new Repository select this template repository as the base.
+* `schemas/` — JSON Schemas describing the assessment-definition,
+  assessment-output, and begrippenkader (terminology) formats.
+* `assessments/` — Assessment content (DPIA, IAMA, pre-scan) and
+  begrippenkaders, validated against the schemas above.
+* `instrument_registry/` — Python package for serving/validating the registry.
 
-After the repository is created make sure to change the following (we may need to consider copier to automate this):
+## Development
 
-* change the owners in the the .github/CODEOWNERS
-* run a global rename command where you rename new_name to your project name
-  * macos: `find . -type f -not -path "./.git/*" -exec  sed -i '' "s/python_project/new_name/g" {} \;`
-  * linux: `find . -type f -not -path "./.git/*" -exec  sed -i "s/python_project/new_name/g" {} \;`
-* rename the python_project/ folder to your project name
-* change author and name in pyproject.toml
-* change labels in Dockerfile to appropriate values
-* Verify the License used
-* Change publiccode.yml to your needs
+This project uses the Poetry package manager and Python 3.11.
+
+* `script/format` — format code
+* `script/lint` — lint code
+* `script/test` — run tests
