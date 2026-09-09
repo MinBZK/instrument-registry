@@ -1,0 +1,25 @@
+# Waar de bron van de instrumenten leeft.
+#
+# mode = "mirror"        de bron leeft upstream; deze repo publiceert een kopie
+#                        die uitsluitend door de sync-workflow wordt bijgewerkt.
+# mode = "authoritative" de bron leeft hier; wijzigingen komen via pull requests
+#                        op deze repo. Bij die overgang vervalt [content.upstream]
+#                        en wordt de sync-workflow verwijderd.
+
+[content]
+mode = "mirror"
+
+[content.upstream]
+repo = "MinBZK/par-dpia-form"
+ref = "main"
+
+[content.upstream.files]
+"sources/dpia.yaml" = "assessments/dpia.yaml"
+"sources/iama.yaml" = "assessments/iama.yaml"
+"sources/prescan.yaml" = "assessments/prescan.yaml"
+"sources/begrippenkader_dpia.yaml" = "assessments/begrippenkader_dpia.yaml"
+"sources/begrippenkader_iama.yaml" = "assessments/begrippenkader_iama.yaml"
+"schemas/assessment-definition.v1.schema.json" = "schemas/assessment-definition.v1.schema.json"
+"schemas/assessment-definition.v2.schema.json" = "schemas/assessment-definition.v2.schema.json"
+"schemas/assessment-output.v2.schema.json" = "schemas/assessment-output.v2.schema.json"
+"schemas/begrippenkader.v1.schema.json" = "schemas/begrippenkader.v1.schema.json"

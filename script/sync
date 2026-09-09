@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Haalt de instrumenten op bij de upstream-bron. Draait alleen in mirror-stand.
+set -euo pipefail
+python3 -m instrument_registry.sync "$@"

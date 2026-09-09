@@ -7,6 +7,20 @@ to help and details about how this project handles them. Please make sure to rea
 contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The
 community looks forward to your contributions. 🎉
 
+## Waar hoort je wijziging thuis
+
+Deze registry staat in **mirror-stand**: de inhoud van `assessments/` en
+`schemas/` leeft in [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form)
+en wordt hier uitsluitend door de sync-workflow bijgewerkt. Een wijziging aan een
+instrument, een begrippenkader of een schema dien je daar in; de sync brengt hem
+hierheen. De CI weigert handmatige wijzigingen aan die mappen.
+
+Alles daarbuiten — de dienst, de validatie, de documentatie — hoort wel in deze
+repo thuis.
+
+Zodra `registry.toml` op `authoritative` staat, leeft de bron hier en vervalt
+deze beperking.
+
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)

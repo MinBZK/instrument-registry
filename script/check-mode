@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Bewaakt dat de inhoud niet handmatig wijzigt zolang de registry spiegelt.
+set -euo pipefail
+python3 -m instrument_registry.check_mode "${1:-origin/main}"

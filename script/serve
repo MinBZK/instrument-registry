@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Draait de registry lokaal op http://localhost:8000
+set -euo pipefail
+uvicorn instrument_registry.api:app --reload --port "${PORT:-8000}"
