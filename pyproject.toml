@@ -15,7 +15,7 @@ pytest = "^9.1.1"
 coverage = "^7.16.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.16.8"
+ruff = "^0.16.9"
 pre-commit = "^4.3.0"
 pyright = "^1.1.414"
 
