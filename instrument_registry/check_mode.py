@@ -25,8 +25,8 @@ def main(argv: list[str] | None = None) -> int:  # pragma: no cover - bedraad in
     if not violations:
         return 0
     print(
-        "De registry staat in mirror-stand: de inhoud komt van MinBZK/par-dpia-form en wordt\n"
-        "uitsluitend door de sync-workflow bijgewerkt. Dien deze wijziging daar in.\n"
+        "De registry staat in mirror-stand: de inhoud van assessments/ en schemas/ mag hier\n"
+        "niet handmatig wijzigen. Dien deze wijziging in bij de bron die registry.toml noemt.\n"
         "Handmatig gewijzigd:",
         file=sys.stderr,
     )

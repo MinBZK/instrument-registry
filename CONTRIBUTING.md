@@ -9,17 +9,10 @@ community looks forward to your contributions. 🎉
 
 ## Waar hoort je wijziging thuis
 
-Deze registry staat in **mirror-stand**: de inhoud van `assessments/` en
-`schemas/` leeft in [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form)
-en wordt hier uitsluitend door de sync-workflow bijgewerkt. Een wijziging aan een
-instrument, een begrippenkader of een schema dien je daar in; de sync brengt hem
-hierheen. De CI weigert handmatige wijzigingen aan die mappen.
-
-Alles daarbuiten — de dienst, de validatie, de documentatie — hoort wel in deze
-repo thuis.
-
-Zodra `registry.toml` op `authoritative` staat, leeft de bron hier en vervalt
-deze beperking.
+Deze repo is de bron van de instrumenten, begrippenkaders en schema's
+(`registry.toml` staat op `authoritative`). Een wijziging aan `assessments/` of
+`schemas/` dien je hier in via een pull request, net als wijzigingen aan de
+dienst, de validatie en de documentatie.
 
 ## Table of Contents
 
