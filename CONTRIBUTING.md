@@ -7,6 +7,13 @@ to help and details about how this project handles them. Please make sure to rea
 contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The
 community looks forward to your contributions. 🎉
 
+## Waar hoort je wijziging thuis
+
+Deze repo is de bron van de instrumenten, begrippenkaders en schema's
+(`registry.toml` staat op `authoritative`). Een wijziging aan `assessments/` of
+`schemas/` dien je hier in via een pull request, net als wijzigingen aan de
+dienst, de validatie en de documentatie.
+
 ## Table of Contents
 
 - [Code of Conduct](#code-of-conduct)

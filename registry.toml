@@ -1,0 +1,11 @@
+# Waar de bron van de instrumenten leeft.
+#
+# mode = "authoritative" de bron leeft hier; wijzigingen komen via pull requests
+#                        op deze repo.
+# mode = "mirror"        de bron leeft upstream; deze repo publiceert een kopie.
+#                        Vereist een upstream en een sync, die sinds de
+#                        overgang naar authoritative niet meer in deze repo
+#                        staan. Wie terug wil, moet die eerst herstellen.
+
+[content]
+mode = "authoritative"

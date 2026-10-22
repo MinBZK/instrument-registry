@@ -14,7 +14,7 @@ description:
     longDescription: |
       Registry of assessment schemas and assessment content (DPIA, IAMA,
       pre-scan) used to determine which privacy and algorithm-impact
-      instruments apply, sourced from MinBZK/par-dpia-form.
+      instruments apply.
     shortDescription: Registry of privacy and algorithm-impact assessment instruments
 developmentStatus: concept
 legal:
