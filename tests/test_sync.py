@@ -95,7 +95,7 @@ def test_resolve_sha_reads_the_commit(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         sync.urllib.request,
         "urlopen",
-        lambda url: FakeResponse(b'{"sha": "abc123"}'),
+        lambda url: FakeResponse(b'{"sha": "abc123"}'),  # pyright: ignore[reportUnknownLambdaType, reportUnknownArgumentType]
     )
 
     assert sync.resolve_sha("MinBZK/par-dpia-form", "main") == "abc123"
