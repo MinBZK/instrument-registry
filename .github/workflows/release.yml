@@ -1,0 +1,75 @@
+name: release
+
+# Bouwt de image en publiceert hem op GHCR.
+#
+# * Een gepubliceerde GitHub-release `vX.Y.Z` levert de image `vX.Y.Z` (en
+#   `latest`); `registry_version` in elke index is dan `vX.Y.Z`.
+# * Een push naar main levert de image `main`, met `registry_version`
+#   `main-<korte sha>`, zodat die nooit met een release te verwarren is.
+#
+# De release-tag moet passen bij de versie in pyproject.toml.
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/minbzk/instrument-registry
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+
+      - name: Bepaal de versie
+        id: version
+        env:
+          EVENT: ${{ github.event_name }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if [ "$EVENT" = "release" ]; then
+            python -m instrument_registry.release "$TAG"
+            {
+              echo "version=$TAG"
+              echo "tags=$IMAGE:$TAG,$IMAGE:latest"
+            } >> "$GITHUB_OUTPUT"
+          else
+            {
+              echo "version=main-${GITHUB_SHA::7}"
+              echo "tags=$IMAGE:main"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          push: true
+          build-args: REGISTRY_VERSION=${{ steps.version.outputs.version }}
+          tags: ${{ steps.version.outputs.tags }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.version=${{ steps.version.outputs.version }}
+            org.opencontainers.image.revision=${{ github.sha }}
