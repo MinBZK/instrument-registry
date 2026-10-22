@@ -1,6 +1,8 @@
 import subprocess
 from pathlib import Path
 
+import pytest
+
 from instrument_registry import check_mode
 
 
@@ -8,7 +10,7 @@ def git(repository: Path, *args: str) -> None:
     subprocess.run(["git", *args], cwd=repository, check=True, capture_output=True)
 
 
-def test_changed_files_lists_what_a_branch_touches(tmp_path: Path, monkeypatch) -> None:
+def test_changed_files_lists_what_a_branch_touches(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     git(tmp_path, "init", "--initial-branch=main")
     git(tmp_path, "config", "user.email", "test@example.org")
     git(tmp_path, "config", "user.name", "Test")
