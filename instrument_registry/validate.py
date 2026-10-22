@@ -6,10 +6,16 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
+from instrument_registry.relaties import Node, build_graph, find_cycles, longest_chains
+
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS_DIR = ROOT / "schemas"
 ASSESSMENTS_DIR = ROOT / "assessments"
 URN_LOCK_FILE = ROOT / "urns.lock.json"
+
+# The most references a chain of questions may pass through before it becomes
+# hard to trace where an answer comes from.
+MAX_CHAIN_LENGTH = 3
 
 # Maps assessment file name to the schema file that validates it.
 ASSESSMENT_SCHEMAS = {
@@ -115,6 +121,36 @@ def check_urn_stability(documents: dict[str, dict[str, Any]], locked: dict[str, 
     return errors
 
 
+def _describe(chain: list[Node]) -> str:
+    return " -> ".join(f"{file_name}#{question_id}" for file_name, question_id in chain)
+
+
+def check_relations(
+    documents: dict[str, dict[str, Any]], max_chain_length: int = MAX_CHAIN_LENGTH
+) -> list[ValidationError]:
+    """Report references to missing questions, cycles and over-long chains between questions."""
+    graph, unresolved = build_graph(documents)
+    errors = [
+        ValidationError(file=file_name, message=f"question {question_id} refers to {target}")
+        for (file_name, question_id), target in unresolved
+    ]
+    cycles = find_cycles(graph)
+    errors += [
+        ValidationError(file=cycle[0][0], message=f"references form a cycle: {_describe(cycle)}") for cycle in cycles
+    ]
+    if cycles:
+        return errors
+    errors += [
+        ValidationError(
+            file=chain[0][0],
+            message=f"chain of {len(chain) - 1} references exceeds {max_chain_length}: {_describe(chain)}",
+        )
+        for chain in longest_chains(graph)
+        if len(chain) - 1 > max_chain_length
+    ]
+    return errors
+
+
 def validate_all() -> list[ValidationError]:
     documents = load_documents()
     return (
@@ -122,4 +158,5 @@ def validate_all() -> list[ValidationError]:
         + check_unique_urns(documents)
         + check_term_references(documents)
         + check_urn_stability(documents, load_locked_urns())
+        + check_relations(documents)
     )

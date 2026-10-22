@@ -27,6 +27,16 @@ De overgang tussen die twee is één pull request: `mode` omzetten, het
 van de repo, de URL's en de URN's blijven gelijk, dus afnemers merken er niets
 van.
 
+## Relaties tussen instrumenten
+
+Een vraag kan via `references` verwijzen naar een vraag in een ander
+instrument, om een antwoord te tonen (pre-view) of over te nemen (pre-fill,
+one-to-one, ...). De validatie (`python -m instrument_registry`) faalt als:
+
+* een verwijzing naar een onbekend instrument of een onbekende vraag wijst;
+* verwijzingen een cirkel vormen;
+* een keten langer is dan `MAX_CHAIN_LENGTH` verwijzingen (nu 3).
+
 ## Endpoints
 
 | Endpoint | Levert |
