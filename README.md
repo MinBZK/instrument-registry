@@ -12,20 +12,11 @@ reuse the same client code.
 
 ## Waar de bron leeft
 
-`registry.toml` bepaalt wie de inhoud mag schrijven.
-
-* `mode = "mirror"` (huidige stand) — de bron leeft in
-  [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form). Deze repo
-  publiceert een kopie die uitsluitend door de sync-workflow wordt bijgewerkt.
-  `assessments/PROVENANCE.json` legt vast uit welke upstream-commit de huidige
-  inhoud komt.
-* `mode = "authoritative"` — de bron leeft hier; wijzigingen komen via pull
-  requests op deze repo.
-
-De overgang tussen die twee is één pull request: `mode` omzetten, het
-`[content.upstream]`-blok verwijderen en de sync-workflow weghalen. De indeling
-van de repo, de URL's en de URN's blijven gelijk, dus afnemers merken er niets
-van.
+Deze repo is de bron van de instrumenten (`mode = "authoritative"` in
+`registry.toml`). Wijzigingen komen via pull requests op deze repo. De eerste
+inhoud is overgenomen uit
+[MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); nieuwe wijzigingen horen
+hier, niet daar.
 
 ## Endpoints
 
@@ -51,7 +42,7 @@ controleren op wijzigingen.
 * `assessments/` — de instrumenten en begrippenkaders.
 * `schemas/` — JSON-Schema's voor assessment-definition, assessment-output en
   begrippenkader.
-* `instrument_registry/` — de dienst: validatie, sync, URN-resolutie, API.
+* `instrument_registry/` — de dienst: validatie, URN-resolutie, API.
 * `urns.lock.json` — de URN's die de registry heeft gepubliceerd. Verdwijnt of
   verhuist er een, dan faalt de validatie: afnemers pinnen erop.
 
@@ -60,7 +51,6 @@ controleren op wijzigingen.
 This project uses the Poetry package manager and Python 3.11.
 
 * `script/serve` — draai de registry lokaal
-* `script/sync` — haal de inhoud op bij de bron (alleen in mirror-stand)
 * `script/check-mode` — controleer of een wijziging langs het toegestane pad gaat
 * `script/format` — format code
 * `script/lint` — lint code
