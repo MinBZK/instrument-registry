@@ -1,5 +1,7 @@
 from typing import Any
 
+import pytest
+
 from instrument_registry import relaties, validate
 
 
@@ -126,3 +128,73 @@ def test_unresolved_reference_is_reported() -> None:
     errors = validate.check_relations(documents)
 
     assert [error.message for error in errors] == ["question 1 refers to DPIA 99 (unknown question)"]
+
+
+def test_string_references_to_an_instrument_are_edges() -> None:
+    documents = {
+        "dpia.yaml": instrument("urn:nl:dpia", task("1", IAMA="2"), task("3", IAMA=["2"])),
+        "iama.yaml": instrument("urn:nl:iama", task("2")),
+    }
+
+    graph, unresolved = relaties.build_graph(documents)
+
+    assert graph == {("dpia.yaml", "1"): [("iama.yaml", "2")], ("dpia.yaml", "3"): [("iama.yaml", "2")]}
+    assert unresolved == []
+
+
+def test_string_reference_to_a_missing_question_is_unresolved() -> None:
+    documents = {"dpia.yaml": instrument("urn:nl:dpia", task("1", DPIA="99"))}
+
+    _, unresolved = relaties.build_graph(documents)
+
+    assert unresolved == [(("dpia.yaml", "1"), "DPIA 99 (unknown question)")]
+
+
+def test_versioned_urns_are_resolved_through_the_urn_module() -> None:
+    documents = {
+        "dpia.yaml": instrument("urn:nl:dpia:3.0", task("1", DPIA=pre_view("2")), task("2")),
+    }
+
+    graph, unresolved = relaties.build_graph(documents)
+
+    assert graph == {("dpia.yaml", "1"): [("dpia.yaml", "2")]}
+    assert unresolved == []
+
+
+def test_tasks_without_id_are_not_merged_into_one_question() -> None:
+    documents = {
+        "dpia.yaml": instrument(
+            "urn:nl:dpia",
+            {"references": {"DPIA": pre_view("1")}},
+            {"references": {"DPIA": pre_view("2")}},
+            task("1"),
+            task("2"),
+        ),
+    }
+
+    graph, _ = relaties.build_graph(documents)
+
+    assert graph == {}
+
+
+def test_long_chain_is_reported_next_to_an_unrelated_cycle() -> None:
+    documents = chain_documents(4)
+    documents["iama.yaml"] = instrument("urn:nl:iama", task("a", IAMA=pre_view("b")), task("b", IAMA=pre_view("a")))
+
+    errors = validate.check_relations(documents, max_chain_length=3)
+
+    assert [error.message.split(":")[0] for error in errors] == [
+        "references form a cycle",
+        "chain of 4 references exceeds 3",
+    ]
+
+
+def test_relations_are_skipped_while_the_schema_fails(monkeypatch: pytest.MonkeyPatch) -> None:
+    documents = validate.load_documents()
+    documents["dpia.yaml"]["tasks"] = "geen lijst"
+    monkeypatch.setattr(validate, "load_documents", lambda: documents)
+
+    errors = validate.validate_all()
+
+    assert errors
+    assert all(error.file == "dpia.yaml" for error in errors)

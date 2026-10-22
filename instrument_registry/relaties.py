@@ -7,13 +7,16 @@ van B, dat weer toont uit C. Een cirkel in zo'n keten heeft geen begin, en een
 lange keten maakt onnavolgbaar waar een antwoord vandaan komt.
 
 De sleutel van een verwijzing is de naam van het doelinstrument (`DPIA`,
-`IAMA`) en hoort bij de URN `urn:nl:<naam in kleine letters>`. Verwijzingen
-zonder vraag-id, zoals `prescanModelId`, wijzen buiten de registry en tellen
-hier niet mee.
+`IAMA`); urn.for_name vertaalt die naar een URN. Hoort de sleutel bij een
+instrument, dan telt elke vorm mee: `"1.1"`, `["1.1"]` of `{id, type}`. Hoort hij
+nergens bij, dan wijst een kale string (zoals `prescanModelId: "3"`) buiten de
+registry; een `{id, type}` wijst dan naar een onbekend instrument.
 """
 
 from collections.abc import Iterator
 from typing import Any, cast
+
+from instrument_registry import urn
 
 # Een vraag in de registry: (bestandsnaam van het instrument, vraag-id).
 Node = tuple[str, str]
@@ -26,11 +29,16 @@ def _tasks(tasks: list[dict[str, Any]]) -> Iterator[dict[str, Any]]:
         yield from _tasks(task.get("tasks", []))
 
 
-def _task_references(value: Any) -> list[str]:
-    """Return the question ids in one reference value, skipping plain external ids."""
+def _question_ids(value: Any, include_strings: bool) -> list[str]:
+    """Return the question ids in one reference value; plain strings only when asked."""
     items = cast(list[Any], value) if isinstance(value, list) else [value]
-    references = [cast(dict[str, Any], item) for item in items if isinstance(item, dict)]
-    return [str(reference["id"]) for reference in references if "id" in reference]
+    ids: list[str] = []
+    for item in items:
+        if isinstance(item, dict) and "id" in item:
+            ids.append(str(cast(dict[str, Any], item)["id"]))
+        elif include_strings and isinstance(item, str | int | float):
+            ids.append(str(item))
+    return ids
 
 
 def build_graph(documents: dict[str, dict[str, Any]]) -> tuple[Graph, list[tuple[Node, str]]]:
@@ -39,8 +47,8 @@ def build_graph(documents: dict[str, dict[str, Any]]) -> tuple[Graph, list[tuple
     Returns the graph and the references whose target does not exist, each as
     the referring question and a readable description of the missing target.
     """
-    files_by_urn = {
-        document["urn"]: file_name for file_name, document in documents.items() if isinstance(document.get("urn"), str)
+    urns = {
+        file_name: document["urn"] for file_name, document in documents.items() if isinstance(document.get("urn"), str)
     }
     question_ids = {
         file_name: {str(task["id"]) for task in _tasks(document.get("tasks", [])) if "id" in task}
@@ -51,13 +59,12 @@ def build_graph(documents: dict[str, dict[str, Any]]) -> tuple[Graph, list[tuple
     for file_name, document in documents.items():
         for task in _tasks(document.get("tasks", [])):
             references: dict[str, Any] = task.get("references") or {}
-            source: Node = (file_name, str(task.get("id")))
+            if "id" not in task:
+                continue
+            source: Node = (file_name, str(task["id"]))
             for key, value in references.items():
-                target_ids = _task_references(value)
-                if not target_ids:
-                    continue
-                target_file = files_by_urn.get(f"urn:nl:{key.lower()}")
-                for target_id in target_ids:
+                target_file = urn.resolve(urn.for_name(key), urns)
+                for target_id in _question_ids(value, include_strings=target_file is not None):
                     if target_file is None:
                         unresolved.append((source, f"{key} {target_id} (unknown instrument {key})"))
                     elif target_id not in question_ids[target_file]:

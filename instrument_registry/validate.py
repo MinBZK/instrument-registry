@@ -138,14 +138,20 @@ def check_relations(
     errors += [
         ValidationError(file=cycle[0][0], message=f"references form a cycle: {_describe(cycle)}") for cycle in cycles
     ]
-    if cycles:
-        return errors
+    # Chains are only measurable without cycles; drop the cyclic questions so
+    # chains elsewhere in the registry are still checked.
+    cyclic = {node for cycle in cycles for node in cycle}
+    acyclic = {
+        node: [child for child in children if child not in cyclic]
+        for node, children in graph.items()
+        if node not in cyclic
+    }
     errors += [
         ValidationError(
             file=chain[0][0],
             message=f"chain of {len(chain) - 1} references exceeds {max_chain_length}: {_describe(chain)}",
         )
-        for chain in longest_chains(graph)
+        for chain in longest_chains(acyclic)
         if len(chain) - 1 > max_chain_length
     ]
     return errors
@@ -153,10 +159,12 @@ def check_relations(
 
 def validate_all() -> list[ValidationError]:
     documents = load_documents()
+    schema_errors = check_schemas(documents)
     return (
-        check_schemas(documents)
+        schema_errors
         + check_unique_urns(documents)
         + check_term_references(documents)
         + check_urn_stability(documents, load_locked_urns())
-        + check_relations(documents)
+        # The relations walk assumes well-formed documents; fix the schema first.
+        + ([] if schema_errors else check_relations(documents))
     )
