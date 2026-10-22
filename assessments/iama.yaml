@@ -2,6 +2,10 @@
 name: Impact Assessment Mensenrechten en Algoritmes
 urn: 'urn:nl:iama'
 version: "2.0"
+status: vastgesteld
+verantwoordelijke:
+  organisatie: Ministerie van Binnenlandse Zaken
+  naam: CIO Rijk
 description: >-
   Impact Assessment Mensenrechten en Algoritmes (IAMA) versie 2. Het IAMA helpt
   overheidsorganisaties bij het beoordelen van de impact van algoritmes op

@@ -12,20 +12,26 @@ reuse the same client code.
 
 ## Waar de bron leeft
 
-`registry.toml` bepaalt wie de inhoud mag schrijven.
+Deze repo is de bron van de instrumenten (`mode = "authoritative"` in
+`registry.toml`). Wijzigingen komen via pull requests op deze repo. Tot oktober
+2026 spiegelde de registry de inhoud van
+[MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); de URL's en
+URN's zijn bij die overgang gelijk gebleven.
 
-* `mode = "mirror"` (huidige stand) — de bron leeft in
-  [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form). Deze repo
-  publiceert een kopie die uitsluitend door de sync-workflow wordt bijgewerkt.
-  `assessments/PROVENANCE.json` legt vast uit welke upstream-commit de huidige
-  inhoud komt.
-* `mode = "authoritative"` — de bron leeft hier; wijzigingen komen via pull
-  requests op deze repo.
+## Status en verantwoordelijke
 
-De overgang tussen die twee is één pull request: `mode` omzetten, het
-`[content.upstream]`-blok verwijderen en de sync-workflow weghalen. De indeling
-van de repo, de URL's en de URN's blijven gelijk, dus afnemers merken er niets
-van.
+Elk instrument legt in zijn yaml vast welke organisatie ervoor verantwoordelijk
+is en wat de status is (`concept` of `vastgesteld`). Het schema
+`assessment-definition.v2` maakt beide velden verplicht, en de index van
+`/assessments` toont ze per instrument.
+
+```yaml
+status: vastgesteld
+verantwoordelijke:
+  organisatie: Ministerie van Binnenlandse Zaken
+  naam: CIO Rijk
+  email: privacy-ciorijk@minbzk.nl
+```
 
 ## Endpoints
 
@@ -51,7 +57,7 @@ controleren op wijzigingen.
 * `assessments/` — de instrumenten en begrippenkaders.
 * `schemas/` — JSON-Schema's voor assessment-definition, assessment-output en
   begrippenkader.
-* `instrument_registry/` — de dienst: validatie, sync, URN-resolutie, API.
+* `instrument_registry/` — de dienst: validatie, URN-resolutie, API.
 * `urns.lock.json` — de URN's die de registry heeft gepubliceerd. Verdwijnt of
   verhuist er een, dan faalt de validatie: afnemers pinnen erop.
 
@@ -60,7 +66,6 @@ controleren op wijzigingen.
 This project uses the Poetry package manager and Python 3.11.
 
 * `script/serve` — draai de registry lokaal
-* `script/sync` — haal de inhoud op bij de bron (alleen in mirror-stand)
 * `script/check-mode` — controleer of een wijziging langs het toegestane pad gaat
 * `script/format` — format code
 * `script/lint` — lint code

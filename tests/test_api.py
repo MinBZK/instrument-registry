@@ -23,9 +23,23 @@ def test_assessments_index_lists_the_instruments(client: TestClient) -> None:
 def test_index_entry_follows_the_task_registry_shape(client: TestClient) -> None:
     entry = client.get("/assessments").json()["entries"][0]
 
-    assert set(entry) == {"type", "size", "name", "path", "urn", "download_url", "links"}
+    assert set(entry) == {"type", "size", "name", "path", "urn", "status", "verantwoordelijke", "download_url", "links"}
     assert entry["type"] == "file"
     assert entry["links"]["self"] == entry["download_url"]
+
+
+def test_index_names_status_and_verantwoordelijke(client: TestClient) -> None:
+    entries = {entry["urn"]: entry for entry in client.get("/assessments").json()["entries"]}
+
+    assert entries["urn:nl:dpia"]["status"] == "vastgesteld"
+    assert entries["urn:nl:dpia"]["verantwoordelijke"]["organisatie"] == "Ministerie van Binnenlandse Zaken"
+
+
+def test_begrippenkaders_have_no_catalogus_entry(client: TestClient) -> None:
+    entry = client.get("/begrippenkaders").json()["entries"][0]
+
+    assert entry["status"] is None
+    assert entry["verantwoordelijke"] is None
 
 
 def test_index_names_the_registry_version(client: TestClient) -> None:

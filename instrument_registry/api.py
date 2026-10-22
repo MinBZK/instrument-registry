@@ -33,12 +33,20 @@ class Link(BaseModel):
     self: str
 
 
+class Verantwoordelijke(BaseModel):
+    organisatie: str
+    naam: str | None = None
+    email: str | None = None
+
+
 class FileInfo(BaseModel):
     type: str
     size: int
     name: str
     path: str
     urn: str | None
+    status: str | None
+    verantwoordelijke: Verantwoordelijke | None
     download_url: str
     links: Link
 
@@ -100,6 +108,7 @@ def create_app(root: Path = ROOT) -> FastAPI:
         entries: list[FileInfo] = []
         for file_name, document in documents[collection].items():
             document_urn = document.get("urn")
+            verantwoordelijke: dict[str, str] | None = document.get("verantwoordelijke")
             url = f"{base_url}/{collection}/urn/{document_urn}" if document_urn else f"{base_url}/{collection}"
             entries.append(
                 FileInfo(
@@ -108,6 +117,8 @@ def create_app(root: Path = ROOT) -> FastAPI:
                     name=file_name,
                     path=f"assessments/{file_name}",
                     urn=document_urn if isinstance(document_urn, str) else None,
+                    status=document.get("status"),
+                    verantwoordelijke=Verantwoordelijke(**verantwoordelijke) if verantwoordelijke else None,
                     download_url=url,
                     links=Link(self=url),
                 )

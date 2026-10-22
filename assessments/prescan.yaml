@@ -3,6 +3,11 @@
 name: Pre-scan DPIA
 urn: 'urn:nl:prescan'
 version: "2.0"
+status: vastgesteld
+verantwoordelijke:
+  organisatie: Ministerie van Binnenlandse Zaken
+  naam: CIO Rijk
+  email: privacy-ciorijk@minbzk.nl
 description: >-
   Een Pre-scan DPIA is een vastlegging van de impact die een bepaalde gegevensverwerking heeft of kan hebben op de privacy van burgers.
 tasks:
