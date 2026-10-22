@@ -18,16 +18,6 @@ inhoud is overgenomen uit
 [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); nieuwe wijzigingen horen
 hier, niet daar.
 
-## Relaties tussen instrumenten
-
-Een vraag kan via `references` verwijzen naar een vraag in een ander
-instrument, om een antwoord te tonen (pre-view) of over te nemen (pre-fill,
-one-to-one, ...). De validatie (`python -m instrument_registry`) faalt als:
-
-* een verwijzing naar een onbekend instrument of een onbekende vraag wijst;
-* verwijzingen een cirkel vormen;
-* een keten langer is dan `MAX_CHAIN_LENGTH` verwijzingen (nu 3).
-
 ## Endpoints
 
 | Endpoint | Levert |
@@ -55,6 +45,16 @@ controleren op wijzigingen.
 * `instrument_registry/` — de dienst: validatie, URN-resolutie, API.
 * `urns.lock.json` — de URN's die de registry heeft gepubliceerd. Verdwijnt of
   verhuist er een, dan faalt de validatie: afnemers pinnen erop.
+
+## Relaties tussen instrumenten
+
+Een vraag kan via `references` verwijzen naar een vraag in een ander
+instrument, om een antwoord te tonen (pre-view) of over te nemen (pre-fill,
+one-to-one, ...). De validatie (`python -m instrument_registry`) faalt als:
+
+* een verwijzing naar een onbekend instrument of een onbekende vraag wijst;
+* verwijzingen een cirkel vormen;
+* een keten langer is dan `MAX_CHAIN_LENGTH` verwijzingen (nu 3).
 
 ## Development
 
