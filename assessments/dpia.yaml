@@ -1,8 +1,13 @@
-# yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
+# yaml-language-server: $schema=../schemas/assessment-definition.v3.schema.json
 
 name: DPIA Rapportagemodel Rijksdienst
 urn: 'urn:nl:dpia'
 version: "3.0"
+status: vastgesteld
+eigenaar:
+  organisatie: Ministerie van Binnenlandse Zaken
+  naam: CIO Rijk
+  email: privacy-ciorijk@minbzk.nl
 description: >-
   Data Protection Impact Assessment template following Dutch government model
   version 3.0
