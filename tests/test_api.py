@@ -20,7 +20,7 @@ def test_assessments_index_lists_the_instruments(client: TestClient) -> None:
     index = client.get("/assessments").json()
 
     urns = {entry["urn"] for entry in index["entries"]}
-    assert urns == {"urn:nl:dpia", "urn:nl:iama", "urn:nl:prescan"}
+    assert urns == {"urn:nl:dpia", "urn:nl:iama", "urn:nl:prescan", "urn:nl:aiia"}
 
 
 def test_index_entry_follows_the_task_registry_shape(client: TestClient) -> None:
@@ -80,6 +80,7 @@ def test_begrippenkaders_are_served(client: TestClient) -> None:
     assert {entry["name"] for entry in index["entries"]} == {
         "begrippenkader_dpia.yaml",
         "begrippenkader_iama.yaml",
+        "begrippenkader_aiia.yaml",
     }
 
 
@@ -168,3 +169,10 @@ def test_index_documents_status_as_an_enum(client: TestClient) -> None:
     openapi = client.get("/openapi.json").json()
 
     assert openapi["components"]["schemas"]["Status"]["enum"] == ["concept", "vastgesteld"]
+
+
+def test_aiia_is_a_concept_owned_by_ienw(client: TestClient) -> None:
+    entries = {entry["urn"]: entry for entry in client.get("/assessments").json()["entries"]}
+
+    assert entries["urn:nl:aiia"]["status"] == "concept"
+    assert entries["urn:nl:aiia"]["eigenaar"]["organisatie"] == "Ministerie van Infrastructuur en Waterstaat"

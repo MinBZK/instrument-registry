@@ -16,8 +16,10 @@ ASSESSMENT_SCHEMAS = {
     "dpia.yaml": "assessment-definition.v3.schema.json",
     "iama.yaml": "assessment-definition.v3.schema.json",
     "prescan.yaml": "assessment-definition.v3.schema.json",
+    "aiia.yaml": "assessment-definition.v3.schema.json",
     "begrippenkader_dpia.yaml": "begrippenkader.v1.schema.json",
     "begrippenkader_iama.yaml": "begrippenkader.v1.schema.json",
+    "begrippenkader_aiia.yaml": "begrippenkader.v1.schema.json",
 }
 
 
