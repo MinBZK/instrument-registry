@@ -1,3 +1,6 @@
+import shutil
+from pathlib import Path
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -35,11 +38,10 @@ def test_index_names_status_and_verantwoordelijke(client: TestClient) -> None:
     assert entries["urn:nl:dpia"]["verantwoordelijke"]["organisatie"] == "Ministerie van Binnenlandse Zaken"
 
 
-def test_begrippenkaders_have_no_catalogus_entry(client: TestClient) -> None:
-    entry = client.get("/begrippenkaders").json()["entries"][0]
+def test_begrippenkaders_have_no_status_or_verantwoordelijke(client: TestClient) -> None:
+    entries = client.get("/begrippenkaders").json()["entries"]
 
-    assert entry["status"] is None
-    assert entry["verantwoordelijke"] is None
+    assert all(entry["status"] is None and entry["verantwoordelijke"] is None for entry in entries)
 
 
 def test_index_names_the_registry_version(client: TestClient) -> None:
@@ -129,7 +131,7 @@ def test_unknown_schema_returns_404(client: TestClient) -> None:
 def test_schemas_index_lists_every_schema(client: TestClient) -> None:
     names = {entry["name"] for entry in client.get("/schemas").json()["entries"]}
 
-    assert "assessment-definition.v2.schema.json" in names
+    assert {"assessment-definition.v2.schema.json", "assessment-definition.v3.schema.json"} <= names
 
 
 def test_head_request_is_answered(client: TestClient) -> None:
@@ -137,3 +139,20 @@ def test_head_request_is_answered(client: TestClient) -> None:
 
     assert response.status_code == 200
     assert response.headers["etag"]
+
+
+def test_malformed_verantwoordelijke_does_not_stop_the_service(tmp_path: Path) -> None:
+    root = create_app().state.root
+    shutil.copytree(root / "assessments", tmp_path / "assessments")
+    shutil.copytree(root / "schemas", tmp_path / "schemas")
+    dpia = tmp_path / "assessments/dpia.yaml"
+    dpia.write_text(
+        dpia.read_text().replace(
+            "status: vastgesteld\nverantwoordelijke:", "status: 3\nverantwoordelijke: CIO Rijk\nvoorheen:", 1
+        )
+    )
+
+    entries = {entry["urn"]: entry for entry in TestClient(create_app(tmp_path)).get("/assessments").json()["entries"]}
+
+    assert entries["urn:nl:dpia"]["status"] is None
+    assert entries["urn:nl:dpia"]["verantwoordelijke"] is None

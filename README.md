@@ -22,8 +22,9 @@ URN's zijn bij die overgang gelijk gebleven.
 
 Elk instrument legt in zijn yaml vast welke organisatie ervoor verantwoordelijk
 is en wat de status is (`concept` of `vastgesteld`). Het schema
-`assessment-definition.v2` maakt beide velden verplicht, en de index van
-`/assessments` toont ze per instrument.
+`assessment-definition.v3` maakt beide velden verplicht, en de index van
+`/assessments` toont ze per instrument. `assessment-definition.v2` blijft
+ongewijzigd beschikbaar voor afnemers die erop pinnen.
 
 ```yaml
 status: vastgesteld

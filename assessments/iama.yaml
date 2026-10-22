@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
+# yaml-language-server: $schema=../schemas/assessment-definition.v3.schema.json
 name: Impact Assessment Mensenrechten en Algoritmes
 urn: 'urn:nl:iama'
 version: "2.0"

@@ -391,30 +391,6 @@
             "description": "URN identifier without version (e.g. 'urn:nl:dpia'). Version is in the separate 'version' field.",
             "examples": ["urn:nl:dpia", "urn:nl:prescan"]
         },
-        "status": {
-            "type": "string",
-            "enum": ["concept", "vastgesteld"],
-            "description": "Stand van het instrument: 'concept' is in ontwikkeling, 'vastgesteld' is vastgesteld door de verantwoordelijke organisatie."
-        },
-        "verantwoordelijke": {
-            "type": "object",
-            "description": "De organisatie die verantwoordelijk is voor het instrument, met aanspreekpunt.",
-            "properties": {
-                "organisatie": {
-                    "type": "string",
-                    "minLength": 1
-                },
-                "naam": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string",
-                    "format": "email"
-                }
-            },
-            "required": ["organisatie"],
-            "additionalProperties": false
-        },
         "tasks": {
             "type": "array",
             "items": {
@@ -503,8 +479,6 @@
         "name",
         "description",
         "urn",
-        "status",
-        "verantwoordelijke",
         "tasks"
     ]
 }

@@ -108,7 +108,8 @@ def create_app(root: Path = ROOT) -> FastAPI:
         entries: list[FileInfo] = []
         for file_name, document in documents[collection].items():
             document_urn = document.get("urn")
-            verantwoordelijke: dict[str, str] | None = document.get("verantwoordelijke")
+            verantwoordelijke = document.get("verantwoordelijke")
+            status = document.get("status")
             url = f"{base_url}/{collection}/urn/{document_urn}" if document_urn else f"{base_url}/{collection}"
             entries.append(
                 FileInfo(
@@ -117,8 +118,10 @@ def create_app(root: Path = ROOT) -> FastAPI:
                     name=file_name,
                     path=f"assessments/{file_name}",
                     urn=document_urn if isinstance(document_urn, str) else None,
-                    status=document.get("status"),
-                    verantwoordelijke=Verantwoordelijke(**verantwoordelijke) if verantwoordelijke else None,
+                    status=status if isinstance(status, str) else None,
+                    verantwoordelijke=Verantwoordelijke.model_validate(verantwoordelijke)
+                    if isinstance(verantwoordelijke, dict)
+                    else None,
                     download_url=url,
                     links=Link(self=url),
                 )

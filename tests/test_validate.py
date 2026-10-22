@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from instrument_registry import validate
@@ -141,3 +143,19 @@ def test_verantwoordelijke_without_organisatie_is_reported(monkeypatch: pytest.M
     errors = validate.validate_all()
 
     assert [(error.file, error.message) for error in errors] == [("iama.yaml", "'organisatie' is a required property")]
+
+
+def test_invalid_email_is_reported(monkeypatch: pytest.MonkeyPatch) -> None:
+    documents = validate.load_documents()
+    documents["dpia.yaml"]["verantwoordelijke"]["email"] = "geen-adres"
+    monkeypatch.setattr(validate, "load_documents", lambda: documents)
+
+    errors = validate.validate_all()
+
+    assert [(error.file, error.message) for error in errors] == [("dpia.yaml", "'geen-adres' is not a 'email'")]
+
+
+def test_v2_schema_does_not_require_status() -> None:
+    schema = json.loads((validate.SCHEMAS_DIR / "assessment-definition.v2.schema.json").read_text())
+
+    assert "status" not in schema["required"]
