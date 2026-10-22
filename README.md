@@ -13,10 +13,10 @@ reuse the same client code.
 ## Waar de bron leeft
 
 Deze repo is de bron van de instrumenten (`mode = "authoritative"` in
-`registry.toml`). Wijzigingen komen via pull requests op deze repo. Tot oktober
-2026 spiegelde de registry de inhoud van
-[MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); de URL's en
-URN's zijn bij die overgang gelijk gebleven.
+`registry.toml`). Wijzigingen komen via pull requests op deze repo. De eerste
+inhoud is overgenomen uit
+[MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); nieuwe wijzigingen horen
+hier, niet daar.
 
 ## Status en verantwoordelijke
 
