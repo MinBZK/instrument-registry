@@ -4,7 +4,7 @@ name: Pre-scan DPIA
 urn: 'urn:nl:prescan'
 version: "2.0"
 status: vastgesteld
-verantwoordelijke:
+eigenaar:
   organisatie: Ministerie van Binnenlandse Zaken
   naam: CIO Rijk
   email: privacy-ciorijk@minbzk.nl

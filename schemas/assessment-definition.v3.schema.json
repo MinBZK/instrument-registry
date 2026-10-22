@@ -394,11 +394,11 @@
         "status": {
             "type": "string",
             "enum": ["concept", "vastgesteld"],
-            "description": "Stand van het instrument: 'concept' is in ontwikkeling, 'vastgesteld' is vastgesteld door de verantwoordelijke organisatie."
+            "description": "Stand van het instrument: 'concept' is in ontwikkeling, 'vastgesteld' is vastgesteld door de eigenaar."
         },
-        "verantwoordelijke": {
+        "eigenaar": {
             "type": "object",
-            "description": "De organisatie die verantwoordelijk is voor het instrument, met aanspreekpunt.",
+            "description": "De organisatie die eigenaar is van het instrument, met aanspreekpunt.",
             "properties": {
                 "organisatie": {
                     "type": "string",
@@ -504,7 +504,7 @@
         "description",
         "urn",
         "status",
-        "verantwoordelijke",
+        "eigenaar",
         "tasks"
     ]
 }

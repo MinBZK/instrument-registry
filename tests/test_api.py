@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from instrument_registry.api import create_app
+from instrument_registry.api import Status, create_app
 
 
 @pytest.fixture
@@ -26,22 +26,22 @@ def test_assessments_index_lists_the_instruments(client: TestClient) -> None:
 def test_index_entry_follows_the_task_registry_shape(client: TestClient) -> None:
     entry = client.get("/assessments").json()["entries"][0]
 
-    assert set(entry) == {"type", "size", "name", "path", "urn", "status", "verantwoordelijke", "download_url", "links"}
+    assert set(entry) == {"type", "size", "name", "path", "urn", "status", "eigenaar", "download_url", "links"}
     assert entry["type"] == "file"
     assert entry["links"]["self"] == entry["download_url"]
 
 
-def test_index_names_status_and_verantwoordelijke(client: TestClient) -> None:
+def test_index_names_status_and_eigenaar(client: TestClient) -> None:
     entries = {entry["urn"]: entry for entry in client.get("/assessments").json()["entries"]}
 
     assert entries["urn:nl:dpia"]["status"] == "vastgesteld"
-    assert entries["urn:nl:dpia"]["verantwoordelijke"]["organisatie"] == "Ministerie van Binnenlandse Zaken"
+    assert entries["urn:nl:dpia"]["eigenaar"]["organisatie"] == "Ministerie van Binnenlandse Zaken"
 
 
-def test_begrippenkaders_have_no_status_or_verantwoordelijke(client: TestClient) -> None:
+def test_begrippenkaders_have_no_status_or_eigenaar(client: TestClient) -> None:
     entries = client.get("/begrippenkaders").json()["entries"]
 
-    assert all(entry["status"] is None and entry["verantwoordelijke"] is None for entry in entries)
+    assert all(entry["status"] is None and entry["eigenaar"] is None for entry in entries)
 
 
 def test_index_names_the_registry_version(client: TestClient) -> None:
@@ -141,18 +141,30 @@ def test_head_request_is_answered(client: TestClient) -> None:
     assert response.headers["etag"]
 
 
-def test_malformed_verantwoordelijke_does_not_stop_the_service(tmp_path: Path) -> None:
+def test_malformed_status_and_eigenaar_do_not_stop_the_service(tmp_path: Path) -> None:
     root = create_app().state.root
     shutil.copytree(root / "assessments", tmp_path / "assessments")
     shutil.copytree(root / "schemas", tmp_path / "schemas")
     dpia = tmp_path / "assessments/dpia.yaml"
     dpia.write_text(
         dpia.read_text().replace(
-            "status: vastgesteld\nverantwoordelijke:", "status: 3\nverantwoordelijke: CIO Rijk\nvoorheen:", 1
+            "status: vastgesteld\neigenaar:", "status: gevalideerd\neigenaar: CIO Rijk\nvoorheen:", 1
         )
     )
 
     entries = {entry["urn"]: entry for entry in TestClient(create_app(tmp_path)).get("/assessments").json()["entries"]}
 
     assert entries["urn:nl:dpia"]["status"] is None
-    assert entries["urn:nl:dpia"]["verantwoordelijke"] is None
+    assert entries["urn:nl:dpia"]["eigenaar"] is None
+
+
+def test_status_enum_matches_the_schema(client: TestClient) -> None:
+    schema = client.get("/schemas/assessment-definition.v3.schema.json").json()
+
+    assert [status.value for status in Status] == schema["properties"]["status"]["enum"]
+
+
+def test_index_documents_status_as_an_enum(client: TestClient) -> None:
+    openapi = client.get("/openapi.json").json()
+
+    assert openapi["components"]["schemas"]["Status"]["enum"] == ["concept", "vastgesteld"]

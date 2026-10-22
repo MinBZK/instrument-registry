@@ -3,7 +3,7 @@ name: Impact Assessment Mensenrechten en Algoritmes
 urn: 'urn:nl:iama'
 version: "2.0"
 status: vastgesteld
-verantwoordelijke:
+eigenaar:
   organisatie: Ministerie van Binnenlandse Zaken
   naam: CIO Rijk
 description: >-

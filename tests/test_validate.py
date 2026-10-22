@@ -135,9 +135,9 @@ def test_unknown_status_is_reported(monkeypatch: pytest.MonkeyPatch) -> None:
     assert "'gevalideerd' is not one of" in errors[0].message
 
 
-def test_verantwoordelijke_without_organisatie_is_reported(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_eigenaar_without_organisatie_is_reported(monkeypatch: pytest.MonkeyPatch) -> None:
     documents = validate.load_documents()
-    documents["iama.yaml"]["verantwoordelijke"] = {"naam": "CIO Rijk"}
+    documents["iama.yaml"]["eigenaar"] = {"naam": "CIO Rijk"}
     monkeypatch.setattr(validate, "load_documents", lambda: documents)
 
     errors = validate.validate_all()
@@ -147,7 +147,7 @@ def test_verantwoordelijke_without_organisatie_is_reported(monkeypatch: pytest.M
 
 def test_invalid_email_is_reported(monkeypatch: pytest.MonkeyPatch) -> None:
     documents = validate.load_documents()
-    documents["dpia.yaml"]["verantwoordelijke"]["email"] = "geen-adres"
+    documents["dpia.yaml"]["eigenaar"]["email"] = "geen-adres"
     monkeypatch.setattr(validate, "load_documents", lambda: documents)
 
     errors = validate.validate_all()

@@ -4,7 +4,7 @@ name: DPIA Rapportagemodel Rijksdienst
 urn: 'urn:nl:dpia'
 version: "3.0"
 status: vastgesteld
-verantwoordelijke:
+eigenaar:
   organisatie: Ministerie van Binnenlandse Zaken
   naam: CIO Rijk
   email: privacy-ciorijk@minbzk.nl
