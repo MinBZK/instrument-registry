@@ -33,3 +33,8 @@ def resolve(query: str, documents: dict[str, str]) -> str | None:
         if matches(query, candidate):
             return key
     return None
+
+
+def for_name(name: str) -> str:
+    """Return the URN query an instrument name in a reference addresses (`DPIA` -> `urn:nl:dpia`)."""
+    return f"urn:nl:{normalize(name).lower()}"

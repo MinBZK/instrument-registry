@@ -29,3 +29,7 @@ def test_resolve_picks_the_matching_document() -> None:
 
 def test_resolve_returns_none_when_absent() -> None:
     assert urn.resolve("urn:nl:onbekend", {"dpia.yaml": "urn:nl:dpia"}) is None
+
+
+def test_instrument_name_becomes_a_urn_query() -> None:
+    assert urn.for_name(" DPIA ") == "urn:nl:dpia"
