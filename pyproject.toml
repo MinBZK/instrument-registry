@@ -12,10 +12,10 @@ jsonschema = "^4.25.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^9.1.1"
-coverage = "^7.16.2"
+coverage = "^7.17.0"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.17.1"
+ruff = "^0.17.2"
 pre-commit = "^4.7.0"
 pyright = "^1.1.414"
 
