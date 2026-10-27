@@ -21,3 +21,6 @@ __pypackages__/
 
 # ruff linter
 .ruff_cache/
+
+# PyCharm stuff
+.idea/

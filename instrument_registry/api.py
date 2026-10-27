@@ -24,7 +24,28 @@ from instrument_registry import urn as urn_module
 from instrument_registry.validate import ROOT, SCHEMAS_DIR
 
 COLLECTIONS = {
-    "assessments": ("dpia.yaml", "iama.yaml", "prescan.yaml"),
+    "assessments": (
+        "dpia.yaml",
+        "iama.yaml",
+        "prescan.yaml",
+        "aanbiedingsformulier.yaml",
+        "aiia_minfin.yaml",
+        "algoritmeregister.yaml",
+        "cloudtoets.yaml",
+        "dataethiek.yaml",
+        "datakwaliteit.yaml",
+        "datasetregistratie.yaml",
+        "euaiact.yaml",
+        "ihhtoets.yaml",
+        "intake.yaml",
+        "modelcard.yaml",
+        "ppm.yaml",
+        "psa.yaml",
+        "quickscan.yaml",
+        "restrisico.yaml",
+        "toegankelijkheid.yaml",
+        "verwerkingsregister.yaml",
+    ),
     "begrippenkaders": ("begrippenkader_dpia.yaml", "begrippenkader_iama.yaml"),
 }
 
