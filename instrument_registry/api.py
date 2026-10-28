@@ -11,6 +11,7 @@ verandert alleen bij een nieuwe deploy, dus een database voegt niets toe.
 import hashlib
 import json
 import os
+from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -33,12 +34,27 @@ class Link(BaseModel):
     self: str
 
 
+class Status(StrEnum):
+    """De stand van een instrument; dezelfde waarden als het schema toestaat."""
+
+    CONCEPT = "concept"
+    VASTGESTELD = "vastgesteld"
+
+
+class Eigenaar(BaseModel):
+    organisatie: str
+    naam: str | None = None
+    email: str | None = None
+
+
 class FileInfo(BaseModel):
     type: str
     size: int
     name: str
     path: str
     urn: str | None
+    status: Status | None
+    eigenaar: Eigenaar | None
     download_url: str
     links: Link
 
@@ -52,6 +68,11 @@ class Index(BaseModel):
     registry_version: str
     links: Link
     entries: list[FileInfo]
+
+
+def parse_status(value: object) -> Status | None:
+    """Read a status from yaml, leaving out anything the schema would reject."""
+    return next((status for status in Status if status.value == value), None)
 
 
 def registry_version() -> str:
@@ -100,6 +121,7 @@ def create_app(root: Path = ROOT) -> FastAPI:
         entries: list[FileInfo] = []
         for file_name, document in documents[collection].items():
             document_urn = document.get("urn")
+            eigenaar = document.get("eigenaar")
             url = f"{base_url}/{collection}/urn/{document_urn}" if document_urn else f"{base_url}/{collection}"
             entries.append(
                 FileInfo(
@@ -108,6 +130,8 @@ def create_app(root: Path = ROOT) -> FastAPI:
                     name=file_name,
                     path=f"assessments/{file_name}",
                     urn=document_urn if isinstance(document_urn, str) else None,
+                    status=parse_status(document.get("status")),
+                    eigenaar=Eigenaar.model_validate(eigenaar) if isinstance(eigenaar, dict) else None,
                     download_url=url,
                     links=Link(self=url),
                 )

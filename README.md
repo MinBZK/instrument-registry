@@ -18,6 +18,22 @@ inhoud is overgenomen uit
 [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); nieuwe wijzigingen horen
 hier, niet daar.
 
+## Status en eigenaar
+
+Elk instrument legt in zijn yaml vast welke organisatie er eigenaar van is en
+wat de status is (`concept` of `vastgesteld`). Het schema
+`assessment-definition.v3` maakt beide velden verplicht, en de index van
+`/assessments` toont ze per instrument. `assessment-definition.v2` blijft
+ongewijzigd beschikbaar voor afnemers die erop pinnen.
+
+```yaml
+status: vastgesteld
+eigenaar:
+  organisatie: Ministerie van Binnenlandse Zaken
+  naam: CIO Rijk
+  email: privacy-ciorijk@minbzk.nl
+```
+
 ## Endpoints
 
 | Endpoint | Levert |

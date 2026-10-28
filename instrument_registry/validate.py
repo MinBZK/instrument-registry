@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 from instrument_registry.relaties import Node, build_graph, find_cycles, longest_chains
 
@@ -19,9 +19,9 @@ MAX_CHAIN_LENGTH = 3
 
 # Maps assessment file name to the schema file that validates it.
 ASSESSMENT_SCHEMAS = {
-    "dpia.yaml": "assessment-definition.v2.schema.json",
-    "iama.yaml": "assessment-definition.v2.schema.json",
-    "prescan.yaml": "assessment-definition.v2.schema.json",
+    "dpia.yaml": "assessment-definition.v3.schema.json",
+    "iama.yaml": "assessment-definition.v3.schema.json",
+    "prescan.yaml": "assessment-definition.v3.schema.json",
     "begrippenkader_dpia.yaml": "begrippenkader.v1.schema.json",
     "begrippenkader_iama.yaml": "begrippenkader.v1.schema.json",
 }
@@ -49,7 +49,7 @@ def check_schemas(documents: dict[str, dict[str, Any]]) -> list[ValidationError]
         if schema_file is None:
             continue
         schema = yaml.safe_load((SCHEMAS_DIR / schema_file).read_text())
-        validator = Draft202012Validator(schema)
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
         for error in validator.iter_errors(document):  # pyright: ignore[reportUnknownMemberType]
             errors.append(ValidationError(file=file_name, message=error.message))
     return errors
