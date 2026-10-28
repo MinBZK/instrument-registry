@@ -53,6 +53,19 @@ Elke response draagt een `ETag` over de inhoud. De inhoud wijzigt alleen bij een
 nieuwe publicatie, dus afnemers kunnen cachen en met `If-None-Match` goedkoop
 controleren op wijzigingen.
 
+## Releases
+
+Versies volgen de GitHub-releases. Een release maken gaat zo:
+
+1. Zet in `pyproject.toml` de nieuwe versie (`0.2.0`) via een pull request.
+2. Publiceer op GitHub een release met tag `v0.2.0`.
+
+De workflow `release` bouwt dan de image `ghcr.io/minbzk/instrument-registry:v0.2.0`
+(en `latest`). Afnemers zien de versie terug als `registry_version` in elke
+index. Past de tag niet bij `pyproject.toml`, dan bouwt de workflow niets.
+Elke push naar `main` levert de image `main`, met `registry_version`
+`main-<korte sha>`.
+
 ## Repository
 
 * `assessments/` — de instrumenten en begrippenkaders.

@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Install poetry
         run: pipx install poetry
@@ -38,3 +40,35 @@ jobs:
 
       - name: Run pyright
         run: poetry run pyright
+
+      - name: Bewaak wie de inhoud mag wijzigen
+        if: github.event_name == 'pull_request'
+        run: poetry run script/check-mode origin/${{ github.base_ref }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "poetry"
+
+      - name: Install poetry dependencies
+        run: poetry install
+
+      - name: Run tests
+        run: poetry run script/test
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build container
+        run: docker build --build-arg REGISTRY_VERSION=ci -t instrument-registry:ci .
