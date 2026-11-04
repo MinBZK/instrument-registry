@@ -18,6 +18,10 @@ inhoud is overgenomen uit
 [MinBZK/par-dpia-form](https://github.com/MinBZK/par-dpia-form); nieuwe wijzigingen horen
 hier, niet daar.
 
+De overige instrumenten (AIIA-MinFin, intake, PPM-projectplan, Classificatietoets BIO2,
+enzovoort) zijn overgezet uit de invulhulp-formulieren (findocs) van het
+Ministerie van Financiën.
+
 ## Endpoints
 
 | Endpoint | Levert |
