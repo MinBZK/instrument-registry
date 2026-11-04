@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Toegankelijkheidsverklaring
-urn: urn:nl:toegankelijkheid
+urn: urn:nl:minfin:ir:toegankelijkheid:1.0
 version: '1.0'
 description: >-
   Overheidsinstanties zijn verplicht hun websites en mobiele apps toegankelijk te maken volgens EN 301 549 (WCAG 2.1 niveau AA) en daarover een toegankelijkheidsverklaring te publiceren. Dit formulier verzamelt alles wat die verklaring nodig heeft: de voorziening, het uitgevoerde onderzoek, de nalevingsstatus, de niet-toegankelijke onderdelen met hun gevolgen voor gebruikers, de verbetermaatregelen met planning, en de meld- en klachtroute. De uitkomst is de inhoud waarmee de officiële verklaring wordt ingevuld.

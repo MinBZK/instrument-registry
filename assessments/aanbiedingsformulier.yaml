@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: PPM Aanbiedingsformulier (Outline Businesscase)
-urn: urn:nl:aanbiedingsformulier
+urn: urn:nl:minfin:ir:aanbiedingsformulier:2.0
 version: '2.0'
 description: >-
   Met het PPM Aanbiedingsformulier (outline businesscase) wordt een I-projectinitiatief aangemeld voor opname in het centrale projectenportfolio van het Beleidsdepartement en/of budget aangevraagd voor de start van de initiatiefase.

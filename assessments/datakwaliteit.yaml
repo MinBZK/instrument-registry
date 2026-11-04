@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Datakwaliteit-assessment
-urn: urn:nl:datakwaliteit
+urn: urn:nl:minfin:ir:datakwaliteit:1.0
 version: '1.0'
 description: >-
   Dit assessment brengt de kwaliteit van een dataset of gegevensverwerking in kaart langs de kerndimensies uit DAMA-DMBOK: volledigheid, uniciteit, tijdigheid, validiteit, juistheid en consistentie. U legt per dimensie een oordeel met onderbouwing vast, beschrijft de datakwaliteitsregels en hoe die gemeten worden, registreert de geconstateerde issues en maakt afspraken over verbetering en bewaking. De uitkomst onderbouwt de datavragen in de DPIA, de AI Impact Assessment en de Model Card.

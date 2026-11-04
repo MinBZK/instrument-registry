@@ -6,6 +6,8 @@ from typing import Any
 import yaml
 from jsonschema import Draft202012Validator
 
+from instrument_registry import urn as urn_module
+
 ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS_DIR = ROOT / "schemas"
 ASSESSMENTS_DIR = ROOT / "assessments"
@@ -66,18 +68,54 @@ def check_schemas(documents: dict[str, dict[str, Any]]) -> list[ValidationError]
     return errors
 
 
+def check_urn_format(documents: dict[str, dict[str, Any]]) -> list[ValidationError]:
+    """Report URNs that are not `urn:nl:<organisatie>:ir:<instrument>:<versie>`.
+
+    When a document carries a `version` field, the version in its URN must match it.
+    """
+    errors: list[ValidationError] = []
+    for file_name, document in documents.items():
+        urn = document.get("urn")
+        if not isinstance(urn, str):
+            continue
+        parsed = urn_module.parse(urn)
+        if parsed is None:
+            errors.append(
+                ValidationError(
+                    file=file_name,
+                    message=f"URN {urn} does not have the form urn:nl:<organisatie>:ir:<instrument>:<versie>",
+                )
+            )
+            continue
+        version = document.get("version")
+        if isinstance(version, str) and parsed.version != version:
+            errors.append(
+                ValidationError(
+                    file=file_name,
+                    message=f"URN {urn} carries version {parsed.version}, but the document has version {version}",
+                )
+            )
+    return errors
+
+
 def check_unique_urns(documents: dict[str, dict[str, Any]]) -> list[ValidationError]:
-    """Report every document whose URN was already claimed by an earlier one."""
+    """Report every document whose instrument URN was already claimed by an earlier one.
+
+    Uniqueness is decided on the URN without version: two versions of the same
+    instrument cannot both live in the registry, because a versionless lookup
+    would be ambiguous.
+    """
     errors: list[ValidationError] = []
     seen: dict[str, str] = {}
     for file_name, document in documents.items():
         urn = document.get("urn")
         if not isinstance(urn, str):
             continue
-        if urn in seen:
-            errors.append(ValidationError(file=file_name, message=f"URN {urn} is already used by {seen[urn]}"))
+        key = urn_module.base(urn)
+        if key in seen:
+            errors.append(ValidationError(file=file_name, message=f"URN {key} is already used by {seen[key]}"))
             continue
-        seen[urn] = file_name
+        seen[key] = file_name
     return errors
 
 
@@ -101,7 +139,7 @@ def check_term_references(documents: dict[str, dict[str, Any]]) -> list[Validati
 
 
 def load_locked_urns() -> dict[str, str]:
-    """Read the URNs the registry has published before, mapped to their file name."""
+    """Read the URNs (without version) the registry has published, mapped to their file name."""
     if not URN_LOCK_FILE.exists():
         return {}
     locked: dict[str, str] = json.loads(URN_LOCK_FILE.read_text())
@@ -112,11 +150,14 @@ def check_urn_stability(documents: dict[str, dict[str, Any]], locked: dict[str, 
     """Report published URNs that disappeared or moved to another file.
 
     Consumers pin a URN, so losing or moving one breaks them silently. Adding
-    URNs is always allowed.
+    URNs is always allowed. The lock holds URNs without version, so publishing a
+    new version of an instrument is not a removal.
     """
     errors: list[ValidationError] = []
     current = {
-        document["urn"]: file_name for file_name, document in documents.items() if isinstance(document.get("urn"), str)
+        urn_module.base(document["urn"]): file_name
+        for file_name, document in documents.items()
+        if isinstance(document.get("urn"), str)
     }
     for urn, file_name in locked.items():
         if urn not in current:
@@ -136,6 +177,7 @@ def validate_all() -> list[ValidationError]:
     documents = load_documents()
     return (
         check_schemas(documents)
+        + check_urn_format(documents)
         + check_unique_urns(documents)
         + check_term_references(documents)
         + check_urn_stability(documents, load_locked_urns())

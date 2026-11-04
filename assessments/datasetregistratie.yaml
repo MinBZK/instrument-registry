@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Dataset-registratie (datasheet)
-urn: urn:nl:datasetregistratie
+urn: urn:nl:minfin:ir:datasetregistratie:1.0
 version: '1.0'
 description: >-
   Deze registratie legt vast wat een dataset is, waar hij vandaan komt, wat erin zit, onder welke grondslag hij verwerkt wordt en onder welke voorwaarden hij gebruikt mag worden. Het is het overheidsequivalent van een 'datasheet for datasets': de documentatie die nodig is om later, door iemand anders, verantwoord met deze data te kunnen werken. De velden zijn uitgelijnd met DCAT-AP-NL zodat de registratie herbruikbaar is als dataset-metadata.
