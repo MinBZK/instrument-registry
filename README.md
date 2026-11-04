@@ -22,6 +22,19 @@ De overige instrumenten (AIIA-MinFin, intake, PPM-projectplan, Classificatietoet
 enzovoort) zijn overgezet uit de invulhulp-formulieren (findocs) van het
 Ministerie van Financiën.
 
+## URN's
+
+Elk instrument heeft een URN van de vorm
+`urn:nl:<organisatie>:ir:<instrument>:<versie>`, bijvoorbeeld
+`urn:nl:minbzk:ir:dpia:3.0`.
+
+* `<organisatie>` — de eigenaar van het instrument, zoals `minbzk` of `minfin`.
+  Dat hoeft geen ministerie te zijn: `duo` of `bd` (Belastingdienst) kan ook.
+* `ir` — instrument registry (de task registry gebruikt `tr`).
+* `<versie>` — gelijk aan het `version`-veld van het document.
+
+Een URN zonder versie (`urn:nl:minbzk:ir:dpia`) levert de gepubliceerde versie.
+
 ## Endpoints
 
 | Endpoint | Levert |
@@ -47,8 +60,9 @@ controleren op wijzigingen.
 * `schemas/` — JSON-Schema's voor assessment-definition, assessment-output en
   begrippenkader.
 * `instrument_registry/` — de dienst: validatie, URN-resolutie, API.
-* `urns.lock.json` — de URN's die de registry heeft gepubliceerd. Verdwijnt of
-  verhuist er een, dan faalt de validatie: afnemers pinnen erop.
+* `urns.lock.json` — de URN's (zonder versie) die de registry heeft gepubliceerd.
+  Verdwijnt of verhuist er een, dan faalt de validatie: afnemers pinnen erop. Een
+  nieuwe versie van een instrument uitbrengen mag gewoon.
 
 ## Development
 

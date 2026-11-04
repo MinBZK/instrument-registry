@@ -24,20 +24,20 @@ def test_every_assessment_file_is_validated() -> None:
 
 def test_duplicate_urns_are_reported() -> None:
     documents = {
-        "dpia.yaml": {"urn": "urn:nl:dpia"},
-        "kopie.yaml": {"urn": "urn:nl:dpia"},
+        "dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
+        "kopie.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
     }
 
     errors = validate.check_unique_urns(documents)
 
     assert [error.file for error in errors] == ["kopie.yaml"]
-    assert "urn:nl:dpia" in errors[0].message
+    assert "urn:nl:minbzk:ir:dpia" in errors[0].message
 
 
 def test_unique_urns_pass() -> None:
     documents = {
-        "dpia.yaml": {"urn": "urn:nl:dpia"},
-        "iama.yaml": {"urn": "urn:nl:iama"},
+        "dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
+        "iama.yaml": {"urn": "urn:nl:minbzk:ir:iama:2.0"},
     }
 
     assert validate.check_unique_urns(documents) == []
@@ -45,8 +45,8 @@ def test_unique_urns_pass() -> None:
 
 def test_validate_all_reports_duplicate_urns(monkeypatch: pytest.MonkeyPatch) -> None:
     documents = {
-        "dpia.yaml": {"urn": "urn:nl:dpia"},
-        "iama.yaml": {"urn": "urn:nl:dpia"},
+        "dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
+        "iama.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
     }
     monkeypatch.setattr(validate, "load_documents", lambda: documents)
 
@@ -81,18 +81,18 @@ def test_known_voorkeur_id_passes() -> None:
 
 
 def test_removed_urn_is_reported() -> None:
-    documents = {"dpia.yaml": {"urn": "urn:nl:dpia"}}
-    locked = {"urn:nl:dpia": "dpia.yaml", "urn:nl:iama": "iama.yaml"}
+    documents = {"dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"}}
+    locked = {"urn:nl:minbzk:ir:dpia": "dpia.yaml", "urn:nl:minbzk:ir:iama": "iama.yaml"}
 
     errors = validate.check_urn_stability(documents, locked)
 
     assert [error.file for error in errors] == ["iama.yaml"]
-    assert "urn:nl:iama" in errors[0].message
+    assert "urn:nl:minbzk:ir:iama" in errors[0].message
 
 
 def test_moved_urn_is_reported() -> None:
-    documents = {"hernoemd.yaml": {"urn": "urn:nl:dpia"}}
-    locked = {"urn:nl:dpia": "dpia.yaml"}
+    documents = {"hernoemd.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"}}
+    locked = {"urn:nl:minbzk:ir:dpia": "dpia.yaml"}
 
     errors = validate.check_urn_stability(documents, locked)
 
@@ -100,8 +100,8 @@ def test_moved_urn_is_reported() -> None:
 
 
 def test_added_urn_is_allowed() -> None:
-    documents = {"dpia.yaml": {"urn": "urn:nl:dpia"}, "nieuw.yaml": {"urn": "urn:nl:nieuw"}}
-    locked = {"urn:nl:dpia": "dpia.yaml"}
+    documents = {"dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"}, "nieuw.yaml": {"urn": "urn:nl:minfin:ir:nieuw:1.0"}}
+    locked = {"urn:nl:minbzk:ir:dpia": "dpia.yaml"}
 
     assert validate.check_urn_stability(documents, locked) == []
 
@@ -110,3 +110,53 @@ def test_locked_urns_match_the_registry() -> None:
     errors = validate.check_urn_stability(validate.load_documents(), validate.load_locked_urns())
 
     assert errors == []
+
+
+def test_two_versions_of_one_instrument_are_duplicates() -> None:
+    documents = {
+        "dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0"},
+        "dpia_oud.yaml": {"urn": "urn:nl:minbzk:ir:dpia:2.0"},
+    }
+
+    errors = validate.check_unique_urns(documents)
+
+    assert [error.file for error in errors] == ["dpia_oud.yaml"]
+
+
+def test_new_version_does_not_break_the_lock() -> None:
+    documents = {"dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.1"}}
+    locked = {"urn:nl:minbzk:ir:dpia": "dpia.yaml"}
+
+    assert validate.check_urn_stability(documents, locked) == []
+
+
+def test_malformed_urn_is_reported() -> None:
+    documents = {"dpia.yaml": {"urn": "urn:nl:dpia", "version": "3.0"}}
+
+    errors = validate.check_urn_format(documents)
+
+    assert [error.file for error in errors] == ["dpia.yaml"]
+    assert "urn:nl:<organisatie>:ir:<instrument>:<versie>" in errors[0].message
+
+
+def test_urn_version_must_match_the_version_field() -> None:
+    documents = {"dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:2.0", "version": "3.0"}}
+
+    errors = validate.check_urn_format(documents)
+
+    assert [error.file for error in errors] == ["dpia.yaml"]
+    assert "3.0" in errors[0].message
+
+
+def test_well_formed_urn_passes() -> None:
+    documents = {
+        "dpia.yaml": {"urn": "urn:nl:minbzk:ir:dpia:3.0", "version": "3.0"},
+        "begrippenkader.yaml": {"urn": "urn:nl:minbzk:ir:begrippenkader-dpia:1.0.0"},
+        "zonder_urn.yaml": {},
+    }
+
+    assert validate.check_urn_format(documents) == []
+
+
+def test_every_published_urn_is_well_formed() -> None:
+    assert validate.check_urn_format(validate.load_documents()) == []

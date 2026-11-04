@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Quickscan BIO2 – Classificatietoets
-urn: urn:nl:quickscan
+urn: urn:nl:minfin:ir:quickscan:2.0
 version: '2.0'
 description: >-
   De Quickscan BIO2 bepaalt de classificatie van informatie op beschikbaarheid, integriteit en vertrouwelijkheid conform de Baseline Informatiebeveiliging Overheid versie 2. De uitkomst geeft aan welk beschermingsniveau vereist is, of een aanvullende risicoanalyse of DPIA nodig is, en welke BIO2-maatregelen van toepassing zijn. Er wordt gestreefd naar een zo laag mogelijk classificatieniveau: te hoog classificeren leidt tot onnodige kosten.

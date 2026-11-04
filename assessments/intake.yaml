@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Intakeformulier nieuwe IV-verzoeken
-urn: urn:nl:intake
+urn: urn:nl:minfin:ir:intake:2.0
 version: '2.0'
 description: >-
   Het intakeformulier wordt gebruikt om nieuwe IV-verzoeken aan te melden voor beoordeling door het intakeboard. Op basis van dit formulier wordt bepaald of het verzoek wordt toegelaten tot het reguliere dienstverlening-, project- of innovatieportfolioproces.

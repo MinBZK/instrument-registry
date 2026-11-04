@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: IHH-toets
-urn: urn:nl:ihhtoets
+urn: urn:nl:minfin:ir:ihhtoets:0.1
 version: '0.1'
 description: >-
   Duurzaam toegankelijke overheidsinformatie is onmisbaar voor een betrouwbare en transparante overheid. Duurzame toegankelijkheid betekent dat overheidsinformatie vindbaar, beschikbaar, leesbaar, interpreteerbaar en betrouwbaar blijft, nu en in de toekomst. De IHH-toets brengt aan de hand van concrete vragen in beeld welke maatregelen of functionaliteiten getroffen kunnen of moeten worden om dat in de beoogde applicatie of het beoogde systeem te bevorderen. De toets volgt de kernprocessen van het DUTO-raamwerk van het Nationaal Archief: registreren, bewaren, migreren, vernietigen en ter beschikking stellen.

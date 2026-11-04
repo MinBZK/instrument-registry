@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Verwerkingsregister (AVG art. 30)
-urn: urn:nl:verwerkingsregister
+urn: urn:nl:minfin:ir:verwerkingsregister:1.0
 version: '1.0'
 description: >-
   Artikel 30 AVG verplicht elke verwerkingsverantwoordelijke een register bij te houden van de verwerkingsactiviteiten onder zijn verantwoordelijkheid. Dit formulier legt de in lid 1 verplicht gestelde elementen vast: verantwoordelijke en FG, doeleinden, categorieën betrokkenen en gegevens, ontvangers, doorgiften buiten de EER, bewaartermijnen en een algemene beschrijving van de beveiligingsmaatregelen. Veel velden zijn af te leiden uit een eerder ingevulde DPIA of intake.

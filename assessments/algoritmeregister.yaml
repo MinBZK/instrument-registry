@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Algoritmeregister-publicatie
-urn: urn:nl:algoritmeregister
+urn: urn:nl:minfin:ir:algoritmeregister:1.0
 version: '1.0'
 description: >-
   Overheidsorganisaties publiceren hun algoritmes in het Algoritmeregister zodat burgers kunnen zien welke algoritmes worden gebruikt, waarvoor, en met welke waarborgen. Dit formulier verzamelt de publicatiegegevens in het dossier: wat het algoritme doet en waarom, op welke wettelijke grondslag het rust, welke toetsen zijn uitgevoerd (DPIA, IAMA, AIIA), hoe het werkt, welke data het gebruikt, hoe mensen erop toezien en waar iemand terecht kan met vragen of bezwaar. Veel velden zijn af te leiden uit de AI Model Card en de eerder ingevulde assessments.

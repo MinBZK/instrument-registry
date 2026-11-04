@@ -17,7 +17,7 @@
         },
         "urn": {
             "type": "string",
-            "pattern": "^urn:nl:[A-Za-z0-9._-]+(:[A-Za-z0-9._-]+)*$"
+            "pattern": "^urn:nl:[a-z]+:ir:[a-z0-9]+(-[a-z0-9]+)*:\\d+(\\.\\d+){0,2}$"
         },
         "language": {
             "type": "string",
