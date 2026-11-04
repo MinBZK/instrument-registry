@@ -17,7 +17,28 @@ def test_assessments_index_lists_the_instruments(client: TestClient) -> None:
     index = client.get("/assessments").json()
 
     urns = {entry["urn"] for entry in index["entries"]}
-    assert urns == {"urn:nl:dpia", "urn:nl:iama", "urn:nl:prescan"}
+    assert urns == {
+        "urn:nl:dpia",
+        "urn:nl:iama",
+        "urn:nl:prescan",
+        "urn:nl:aanbiedingsformulier",
+        "urn:nl:aiiaminfin",
+        "urn:nl:algoritmeregister",
+        "urn:nl:cloudtoets",
+        "urn:nl:dataethiek",
+        "urn:nl:datakwaliteit",
+        "urn:nl:datasetregistratie",
+        "urn:nl:euaiact",
+        "urn:nl:ihhtoets",
+        "urn:nl:intake",
+        "urn:nl:modelcard",
+        "urn:nl:ppm",
+        "urn:nl:psa",
+        "urn:nl:quickscan",
+        "urn:nl:restrisico",
+        "urn:nl:toegankelijkheid",
+        "urn:nl:verwerkingsregister",
+    }
 
 
 def test_index_entry_follows_the_task_registry_shape(client: TestClient) -> None:

@@ -2,5 +2,22 @@
   "urn:nl:dpia": "dpia.yaml",
   "urn:nl:iama": "iama.yaml",
   "urn:nl:prescan": "prescan.yaml",
-  "urn:nl:begrippenkaderdpia_pre-scandpia:3.0:begrippenkader:1.0.0": "begrippenkader_dpia.yaml"
+  "urn:nl:begrippenkaderdpia_pre-scandpia:3.0:begrippenkader:1.0.0": "begrippenkader_dpia.yaml",
+  "urn:nl:aanbiedingsformulier": "aanbiedingsformulier.yaml",
+  "urn:nl:aiiaminfin": "aiia_minfin.yaml",
+  "urn:nl:algoritmeregister": "algoritmeregister.yaml",
+  "urn:nl:cloudtoets": "cloudtoets.yaml",
+  "urn:nl:dataethiek": "dataethiek.yaml",
+  "urn:nl:datakwaliteit": "datakwaliteit.yaml",
+  "urn:nl:datasetregistratie": "datasetregistratie.yaml",
+  "urn:nl:euaiact": "euaiact.yaml",
+  "urn:nl:ihhtoets": "ihhtoets.yaml",
+  "urn:nl:intake": "intake.yaml",
+  "urn:nl:modelcard": "modelcard.yaml",
+  "urn:nl:ppm": "ppm.yaml",
+  "urn:nl:psa": "psa.yaml",
+  "urn:nl:quickscan": "quickscan.yaml",
+  "urn:nl:restrisico": "restrisico.yaml",
+  "urn:nl:toegankelijkheid": "toegankelijkheid.yaml",
+  "urn:nl:verwerkingsregister": "verwerkingsregister.yaml"
 }
