@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: AI-systeemregistratie (Model Card)
-urn: urn:nl:modelcard
+urn: urn:nl:minfin:ir:modelcard:0.1
 version: '0.1'
 description: >-
   De AI-systeemregistratie (Model Card) legt de essentiële informatie van een AI-systeem vast: wat het doet, wie het bezit, welke data erin gaat, welk model wordt gebruikt en wat de bekende beperkingen en compliance-status zijn. Gebaseerd op de AI Body of Knowledge (Template 2).

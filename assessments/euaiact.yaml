@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: EU AI Act Compliance Checklist
-urn: urn:nl:euaiact
+urn: urn:nl:minfin:ir:euaiact:0.1
 version: '0.1'
 description: >-
   De EU AI Act Compliance Checklist helpt bij het classificeren van een AI-systeem onder de AI-verordening (Verordening (EU) 2024/1689) en het cumulatief nalopen van de bijbehorende verplichtingen. De checklist is gebaseerd op de AI Body of Knowledge (Template 3, EU AI Act Compliance Checklist) en geharmoniseerd met het EU-conformiteitsverklaring-instrument van het MinBZK task-registry (urn:nl:aivt:tr:ca:1.0).

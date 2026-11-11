@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: DPIA Rapportagemodel Rijksdienst
-urn: 'urn:nl:dpia'
+urn: urn:nl:minbzk:ir:dpia:3.0
 version: "3.0"
 description: >-
   Data Protection Impact Assessment template following Dutch government model

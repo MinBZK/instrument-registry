@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Pre-scan DPIA
-urn: 'urn:nl:prescan'
+urn: urn:nl:minbzk:ir:prescan:2.0
 version: "2.0"
 description: >-
   Een Pre-scan DPIA is een vastlegging van de impact die een bepaalde gegevensverwerking heeft of kan hebben op de privacy van burgers.

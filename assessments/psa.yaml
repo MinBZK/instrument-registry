@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Project Start Architectuur (PSA)
-urn: urn:nl:psa
+urn: urn:nl:minfin:ir:psa:1.0
 version: '1.0'
 description: >-
   De Project Start Architectuur (PSA) beschrijft in globale termen hoe de organisatorische, informatie-, applicatie- en technologielaag eruitzien na het project. De PSA is één van de voorwaarden om te starten met een project en geeft richting aan de uitvoering.

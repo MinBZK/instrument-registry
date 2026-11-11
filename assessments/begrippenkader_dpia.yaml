@@ -2,7 +2,7 @@ schema_version: 1.0.0
 name: Begrippenkader Model DPIA Rijksdienst en Pre-scan DPIA
 description: 'Het begrippenkader is een lijst met definities van begrippen die worden
   gebruikt  in de DPIA en pre-scan DPIA. Het begrippenkader is ontwikkeld door J&V. '
-urn: urn:nl:begrippenkaderdpia_pre-scandpia:3.0:begrippenkader:1.0.0
+urn: urn:nl:minbzk:ir:begrippenkader-dpia:1.0.0
 language: nl
 version_date: '2025-06-01'
 owners:

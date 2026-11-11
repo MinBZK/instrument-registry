@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../schemas/assessment-definition.v2.schema.json
 
 name: Cloudtoets
-urn: urn:nl:cloudtoets
+urn: urn:nl:minfin:ir:cloudtoets:1.0
 version: '1.0'
 description: >-
   Met deze toets krijgt u inzicht of gegevens door een clouddienst mogen worden verwerkt en of clouddiensten van een beoogde cloud provider mogen worden afgenomen. De toets volgt het Cloudbeleid van het Ministerie van Financiën, dat is gebaseerd op het Rijksbreed Cloudbeleid 2022 en het implementatiekader 'risicoafweging cloudgebruik'. Publieke, private, hybride en community clouddiensten zijn in scope. Aan het gebruik van clouddiensten zijn restricties verbonden; die zitten in onderdeel 3 en 4. Wordt een of meer van die vragen negatief beantwoord, dan is het inschakelen van een clouddienst niet toegestaan. Zijn alle vragen positief beantwoord, dan is het inschakelen van een clouddienst in beginsel toegestaan.

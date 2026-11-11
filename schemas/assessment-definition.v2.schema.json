@@ -387,9 +387,9 @@
         },
         "urn": {
             "type": "string",
-            "pattern": "^urn:nl:[a-z]+$",
-            "description": "URN identifier without version (e.g. 'urn:nl:dpia'). Version is in the separate 'version' field.",
-            "examples": ["urn:nl:dpia", "urn:nl:prescan"]
+            "pattern": "^urn:nl:[a-z]+:ir:[a-z0-9]+(-[a-z0-9]+)*:\\d+(\\.\\d+){0,2}$",
+            "description": "URN identifier in the form urn:nl:<organisatie>:ir:<instrument>:<versie> (e.g. 'urn:nl:minbzk:ir:dpia:3.0'). The version must equal the 'version' field.",
+            "examples": ["urn:nl:minbzk:ir:dpia:3.0", "urn:nl:minfin:ir:cloudtoets:1.0"]
         },
         "tasks": {
             "type": "array",
