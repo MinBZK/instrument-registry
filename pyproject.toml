@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.11"
 pyyaml = "^6.0.2"
 jsonschema = "^4.25.0"
-fastapi = "^0.162.5"
+fastapi = "^0.165.0"
 uvicorn = { extras = ["standard"], version = "^0.54.0" }
 
 [tool.poetry.group.test.dependencies]
@@ -18,7 +18,7 @@ httpx = "^0.28.0"
 coverage = "^7.17.3"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.17.5"
+ruff = "^0.17.6"
 pre-commit = "^4.7.0"
 pyright = "^1.1.414"
 
